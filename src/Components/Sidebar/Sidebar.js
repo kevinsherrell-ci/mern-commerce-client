@@ -1,0 +1,34 @@
+import styled from 'styled-components';
+import {Container, SubMenu, LinkContainer, SubMenuItem, MenuHeader} from "./SidebarStyles";
+
+import {useState} from "react";
+import MenuLink from "./MenuLink/MenuLink";
+
+
+const linkFormat = [
+    {"blush": ["powder", "cream"]},
+    {"bronzer": ["powder"]},
+    {"eyebrow": ["Pencil"]},
+    {"eyeliner": ["liquid", "pencil", "gel", "cream"]},
+    {"eyeshadow": ["palette", "pencil", "cream"]},
+    {"foundation": ["concealer", "liquid", "contour", "cream", "mineral", "powder", "highlighter"]},
+    {"lip liner": ["pencil"]},
+    {"lip stick": ["lip stick", "lip gloss", "liquid", "lip stain"]},
+    {"mascara": []},
+    {"nail polish": []}
+]
+
+const Sidebar = () => {
+    const mapLinks = linkFormat.map(productType=>{
+        const type = Object.keys(productType);
+        const categories = Object.values(productType);
+        return <MenuLink type={type} categories={categories[0]}/>
+    })
+    return (
+        <Container>
+            {mapLinks}
+        </Container>
+    )
+}
+
+export default Sidebar;
