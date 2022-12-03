@@ -1,21 +1,26 @@
-import {LinkContainer, MenuHeader, SubMenu, SubMenuItem} from "../MenuLink/MenuLinkStyles";
+import {HeaderContainer, LinkContainer, MenuHeader, MenuIcon, SubMenu, SubMenuItem} from "../MenuLink/MenuLinkStyles";
 import {useState} from "react";
 
+const icon = require('../../../Assets/upload.png');
 const MenuLink = (props) => {
     console.log(props);
     const [subOpened, setSubOpened] = useState(false);
     const {type, categories} = props;
 
     const mapCategories = categories.map(category => {
-        return <SubMenuItem visibility={subOpened && 'visible'}>{category}</SubMenuItem>
+        return <SubMenuItem height={subOpened && "300px"} visibility={subOpened && 'visible'}>{category}</SubMenuItem>
     })
 
     return (
-        <LinkContainer text={"this is a text prop"} >
-            <MenuHeader onClick={() => {
-                setSubOpened(!subOpened);
-                console.log(subOpened);
-            }}>{type}</MenuHeader>
+        <LinkContainer text={"this is a text prop"}>
+            <HeaderContainer>
+                <MenuHeader onClick={() => {
+                    setSubOpened(!subOpened);
+                    console.log(subOpened);
+                }}>{type}</MenuHeader>
+                <MenuIcon src={icon} transform={subOpened && "rotate(180deg)"}/>
+            </HeaderContainer>
+
             <SubMenu height={subOpened === false ? "0px" : "300px"}>
                 {mapCategories}
             </SubMenu>
