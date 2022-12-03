@@ -12,15 +12,15 @@ const linkFormat = [
     {"eyeliner": ["liquid", "pencil", "gel", "cream"]},
     {"eyeshadow": ["palette", "pencil", "cream"]},
     {"foundation": ["concealer", "liquid", "contour", "cream", "mineral", "powder", "highlighter"]},
-    {"lip liner": ["pencil"]},
-    {"lip stick": ["lip stick", "lip gloss", "liquid", "lip stain"]},
+    {"lip_liner": ["pencil"]},
+    {"lipstick": ["lipstick", "lip_gloss", "liquid", "lip_stain"]},
     {"mascara": []},
-    {"nail polish": []}
+    {"nail_polish": []}
 ]
 
 const Sidebar = () => {
     const mapLinks = linkFormat.map(productType=>{
-        const type = Object.keys(productType);
+        const type = Object.keys(productType)[0];
         const categories = Object.values(productType);
         return <MenuLink type={type} categories={categories[0]}/>
     })

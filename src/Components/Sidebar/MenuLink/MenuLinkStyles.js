@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import {Link} from 'react-router-dom';
 export const SubMenu = styled.div.attrs(props => ({
     height: props.height || "0px",
 }))`
@@ -35,7 +35,7 @@ export const MenuIcon = styled.img.attrs(props => ({
   transform: ${props=>props.transform}
 
 `
-export const SubMenuItem = styled.p.attrs(props => ({
+export const SubMenuItem = styled(Link).attrs(props => ({
     visibility: props.visibility || 'hidden',
     height: props.height || "0"
 }))`
