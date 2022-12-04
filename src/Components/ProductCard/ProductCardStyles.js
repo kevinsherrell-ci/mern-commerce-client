@@ -54,6 +54,8 @@ export const AddToCard = styled.button`
 export const BrandHeader = styled.h3`
   font-style: italic;
   margin-bottom: 5px;
+  color: hotpink;
+
 `
 export const ProductLink = styled(Link)`
   text-decoration: none;

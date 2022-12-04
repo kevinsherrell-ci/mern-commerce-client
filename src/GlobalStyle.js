@@ -8,6 +8,9 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
       color: black;
     }
+    a{
+      text-decoration: none;
+    }
 `
 
 export default GlobalStyle;

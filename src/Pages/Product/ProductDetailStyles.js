@@ -13,7 +13,9 @@ export const DetailLeft = styled.section`
   width: 40%;
 `
 export const HeaderWrapper = styled.div``
-export const Name = styled.h1``
+export const Name = styled.h1`
+    color: hotpink;
+`
 export const Brand = styled.h3``
 export const WebsiteLink = styled.sub``
 export const ImageWrapper = styled.div`

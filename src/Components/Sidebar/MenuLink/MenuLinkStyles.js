@@ -6,7 +6,7 @@ export const SubMenu = styled.div.attrs(props => ({
   transition: all .2s;
   display: flex;
   flex-direction: column;
-  background-color: orange;
+  //background-color: orange;
   max-height: ${props => props.height}
 `
 export const HeaderContainer = styled.div`
@@ -15,13 +15,16 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  background-color: mediumpurple;
+  &:hover{
+    background-color: lightgray;
+  }
+  //background-color: mediumpurple;
 `
 export const MenuHeader = styled.div`
-  margin: 0px;
+  margin-bottom: 5px;
 
   &:hover {
-    cursor: pointer
+    cursor: pointer;
   }
 `
 export const MenuIcon = styled.img.attrs(props => ({
@@ -39,12 +42,13 @@ export const SubMenuItem = styled(Link).attrs(props => ({
     visibility: props.visibility || 'hidden',
     height: props.height || "0"
 }))`
-  margin: 0;
+  margin-bottom: 5px;
   max-height: ${props => props.height};
   overflow: hidden;
-
+  padding-left: 15px;
   &:hover {
-    cursor: pointer
+    cursor: pointer;
+    background-color: #EFEFEF;
   }
 `
 export const LinkContainer = styled.div`
@@ -52,7 +56,7 @@ export const LinkContainer = styled.div`
   flex-direction: column;
   margin: 0;
   padding: 0;
-  background-color: green;
+  //background-color: lightgray;
   //width: 150px;
 `
 // height: ${props => props.height};

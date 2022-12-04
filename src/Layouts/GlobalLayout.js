@@ -1,18 +1,20 @@
-import Sidebar  from '../Components/Sidebar/Sidebar';
+import Sidebar from '../Components/Sidebar/Sidebar';
 import NavBar from "../Components/NavBar/NavBar";
 import {Outlet} from "react-router-dom";
-const GlobalLayout = ()=>{
-    return (
-        <div style={{display: "flex", flexDirection: 'column'}}>
-            <NavBar/>
-            <div className="content-container" style={{display: 'flex'}}>
-                <Sidebar width={'10%'}/>
-                <div>
-                    <Outlet/>
-                </div>
-            </div>
+import {ContentContainer, GlobalContainer, MainContainer} from "./GlobalLayoutStyles";
 
-        </div>
+const GlobalLayout = () => {
+    return (
+        <GlobalContainer>
+            <NavBar/>
+            <MainContainer>
+                <Sidebar width={'10%'}/>
+                <ContentContainer>
+                    <Outlet/>
+                </ContentContainer>
+            </MainContainer>
+
+        </GlobalContainer>
     )
 }
 export default GlobalLayout;
