@@ -1,6 +1,7 @@
 import {useLocation} from 'react-router-dom';
 import {useContext, useEffect, useState} from "react";
 import {MakeupContext} from "../Hooks/MakeupAPI";
+import ProductCard from '../Components/ProductCard/ProductCard';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -19,10 +20,14 @@ const Product = () => {
 
     }, [query]);
     console.log("Product state", products);
-
+    const mapData = data.map(product => {
+        console.log("this should be mapping data....")
+        console.log(product);
+        return <ProductCard {...product}/>
+    })
     return (
         <div>
-            PRODUCT PAGE {queryParams.toString()}
+            {mapData}
         </div>
     )
 }
