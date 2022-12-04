@@ -18,14 +18,14 @@ const linkFormat = [
     {"nail_polish": []}
 ]
 
-const Sidebar = () => {
+const Sidebar = ({width}) => {
     const mapLinks = linkFormat.map(productType=>{
         const type = Object.keys(productType)[0];
         const categories = Object.values(productType);
         return <MenuLink type={type} categories={categories[0]}/>
     })
     return (
-        <Container>
+        <Container width={width}>
             {mapLinks}
         </Container>
     )

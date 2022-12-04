@@ -53,7 +53,7 @@ export const LinkContainer = styled.div`
   margin: 0;
   padding: 0;
   background-color: green;
-  width: 150px;
+  //width: 150px;
 `
 // height: ${props => props.height};
 // overflow: hidden;

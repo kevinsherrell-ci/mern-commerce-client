@@ -1,22 +1,22 @@
 import {
-    AddToCard,
+    AddToCard, BrandHeader,
     ImageSection,
     InfoSection, Price,
     PriceSection,
     ProductCardContainer,
-    ProductImage
+    ProductImage, ProductLink
 } from "./ProductCardStyles";
 
 const ProductCard = (props)=>{
-    const {api_featured_image, brand, description, image_link, name, price, rating} = props;
+    const {id,api_featured_image, brand, description, image_link, name, price, rating} = props;
     return (
         <ProductCardContainer>
             <ImageSection>
                 <ProductImage src={api_featured_image}  alt=""/>
             </ImageSection>
             <InfoSection>
-                <h3>{brand}</h3>
-                <h2>{name}</h2>
+                <BrandHeader>{brand}</BrandHeader>
+                <ProductLink to={`/product/detail/${id}`}>{name}</ProductLink>
             </InfoSection>
             <PriceSection>
                 <Price>${price}</Price>

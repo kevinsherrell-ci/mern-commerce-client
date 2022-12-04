@@ -1,7 +1,8 @@
-import {useLocation} from 'react-router-dom';
+import {Outlet, useLocation} from 'react-router-dom';
 import {useContext, useEffect, useState} from "react";
-import {MakeupContext} from "../Hooks/MakeupAPI";
-import ProductCard from '../Components/ProductCard/ProductCard';
+import {MakeupContext} from "../../Hooks/MakeupAPI";
+import ProductCard from '../../Components/ProductCard/ProductCard';
+import {ProductPageContainer} from "./ProudctStyles";
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -26,9 +27,9 @@ const Product = () => {
         return <ProductCard {...product}/>
     })
     return (
-        <div>
+        <ProductPageContainer>
             {mapData}
-        </div>
+        </ProductPageContainer>
     )
 }
 export default Product;

@@ -1,8 +1,10 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "./Pages/Home";
 import GlobalLayout from "./Layouts/GlobalLayout";
-import Product from "./Pages/Product";
 import GlobalStyle from "./GlobalStyle";
+import Product from "./Pages/Product/Product";
+import ProductDetail from "./Pages/Product/ProductDetail";
+
 function App() {
     const router = createBrowserRouter([{
         path: '/',
@@ -10,14 +12,20 @@ function App() {
         children: [{
             path: '/',
             element: <Home/>
-        },{
-            path:'product',
+        }, {
+            path: '/product',
             element: <Product/>,
-            children: [{
-                path: "/product/:product_type",
-                element: <Product/>
-            }]
-        }
+            children: [
+                {
+                    path: "/product/:product_type",
+                    element: <Product/>
+                },
+            ]
+        },
+            {
+                path: '/product/detail/:id',
+                element: <ProductDetail/>
+            }
         ]
     }])
     return (

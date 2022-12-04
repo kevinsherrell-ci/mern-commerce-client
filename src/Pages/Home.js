@@ -1,6 +1,9 @@
+import {Outlet} from "react-router-dom";
+
 const Home = ()=>{
     return (
-        <div>Home Page</div>
+        <div>Home Page
+        </div>
     )
 }
 export default Home;

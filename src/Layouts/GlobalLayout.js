@@ -6,7 +6,7 @@ const GlobalLayout = ()=>{
         <div style={{display: "flex", flexDirection: 'column'}}>
             <NavBar/>
             <div className="content-container" style={{display: 'flex'}}>
-                <Sidebar/>
+                <Sidebar width={'10%'}/>
                 <div>
                     <Outlet/>
                 </div>

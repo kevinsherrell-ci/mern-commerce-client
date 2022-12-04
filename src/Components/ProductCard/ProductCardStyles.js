@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 export const ProductCardContainer = styled.div`
   display: flex;
@@ -38,15 +39,27 @@ export const PriceSection = styled.div`
   width: 20%;
   height: 100%;
   padding: 40px;
-  
+
 `
 export const Price = styled.p`
-    margin-bottom: 20px;
-    font-size: 1.5em;
+  margin-bottom: 20px;
+  font-size: 1.5em;
 `
 export const AddToCard = styled.button`
   border: none;
   border-radius: 10px;
   padding: 10px;
   width: 100px;
+`
+export const BrandHeader = styled.h3`
+  font-style: italic;
+  margin-bottom: 5px;
+`
+export const ProductLink = styled(Link)`
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5em;
+  &:hover{
+    cursor: pointer;
+  }
 `

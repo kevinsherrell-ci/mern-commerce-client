@@ -9,7 +9,7 @@ const MenuLink = (props) => {
 
     const mapCategories = categories.map(category => {
         return <SubMenuItem height={subOpened && "300px"} visibility={subOpened && 'visible'}
-                            to={`/product/${type}?product_type=${type}&product_category=${category}`}>{category}</SubMenuItem>
+                            to={`product/${type}?product_type=${type}&product_category=${category}`}>{category}</SubMenuItem>
     })
 
     return (
