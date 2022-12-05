@@ -52,6 +52,10 @@ export const CartWrapper = styled.p`
 `
 export const CartIcon = styled.img`
   width: 40%;
+  &:hover{
+    cursor: pointer;
+    width: 43%;
+  }
 `
 export const CartCounter = styled.span`
   position: absolute;

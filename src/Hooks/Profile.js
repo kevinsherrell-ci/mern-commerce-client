@@ -14,12 +14,25 @@ export const ProfileProvider = ({children}) => {
         }
         existingItem.qty++;
     }
+    const getCartTotal = () => {
+        let totalPrice = 0;
+        cart.forEach(item => {
+            totalPrice += (item.qty * item.price);
+        })
+        return totalPrice;
+    }
+    const updateQty = (id, qty) => {
+        const currentItem = cart.find(item => item.id === id);
+        currentItem.qty = qty;
+        console.log(currentItem);
 
+    }
     return (
         <ProfileContext.Provider value={{
             cart: cart,
-            addToCart: addToCart
-
+            addToCart: addToCart,
+            getCartTotal: getCartTotal,
+            updateQty: updateQty
         }}>
             {children}
         </ProfileContext.Provider>

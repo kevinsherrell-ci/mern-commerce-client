@@ -15,11 +15,11 @@ import CartProductCard from "../CartProductCard";
 import {useProfileContext} from "../../Hooks/Profile";
 
 const NavBar = () => {
-    const {cart} = useProfileContext();
+    const {cart, getCartTotal} = useProfileContext();
     const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
     const [cartCount, setCartCount] = useState(100); // todo: make cart state global
     console.log(cart.length);
-    const [cartOpened, setCartOpened] = useState(true);
+    const [cartOpened, setCartOpened] = useState(false);
 
     const cartArray = [
         {
@@ -74,13 +74,14 @@ const NavBar = () => {
                         <SearchButton>Search</SearchButton>
                     </SearchContainer>
                     <CartWrapper>
-                        <CartIcon src={CartImage}/>
+                        <CartIcon src={CartImage} onClick={() => setCartOpened(!cartOpened)}/>
                         {(cart !== null && cart.length > 0) && <CartCounter>{cart.length}</CartCounter>}
                     </CartWrapper>
                 </NavContainer>
                 {cartOpened && (
                     <CartContainer height={"500px"}>
                         {mapCart}
+                        <p>Total Price: {getCartTotal()}</p>
                     </CartContainer>
                 )}
             </InnerContainer>
