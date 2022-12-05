@@ -21,42 +21,6 @@ const NavBar = () => {
     console.log(cart.length);
     const [cartOpened, setCartOpened] = useState(false);
 
-    const cartArray = [
-        {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        }, {
-            productId: '12345',
-            item: "Item"
-        },
-    ]
     const mapCart = cart.map(item => {
         return (item.qty > 0) && <CartProductCard {...item}/>
     })

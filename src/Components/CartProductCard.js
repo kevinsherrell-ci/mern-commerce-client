@@ -12,27 +12,28 @@ import {useEffect, useState} from "react";
 const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
     const {updateQty} = useProfileContext();
     const [_qty, _setQty] = useState(qty);
-    console.log(_qty);
+    console.log("quantity PRODUCTCARD", qty);
     const adjustQty = (e) => {
-        let quantity = _qty;
+        let quantity = qty;
 
         switch (e.target.name) {
+
             case "decrease":
                 quantity--
-                (_qty > 0) && _setQty(quantity);
+                (qty > 0) && updateQty(id,quantity);
                 break;
             case "increase":
                 quantity++
-                _setQty(quantity);
+                updateQty(id,quantity);
                 break;
         }
     }
     useEffect(() => {
-        updateQty(id, _qty);
+
     }, [_qty])
     return (
         <CartProductCardContainer>
-            <ImageSection >
+            <ImageSection>
                 <ProductImage src={api_featured_image} alt=""/>
             </ImageSection>
             <InfoSection>
@@ -42,7 +43,7 @@ const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
                 </NameBrand>
                 <Quantity>
                     <QuantityLabel>Quantity: </QuantityLabel>
-                    <QuantityInput type={"number"} value={_qty} onChange={(e) => _setQty(e.target.value)}/>
+                    <QuantityInput type={"number"} value={qty} onChange={(e) => _setQty(e.target.value)}/>
                     <DecreaseButton name={'decrease'} onClick={(e) => adjustQty(e)}>-</DecreaseButton>
                     <IncreaseButton name={'increase'} onClick={(e) => adjustQty(e)}>+</IncreaseButton>
                 </Quantity>
