@@ -10,6 +10,7 @@ export const NavBarContainer = styled.div`
   background-color: white;
 `
 export const InnerContainer = styled.div`
+  position: relative;
   max-width: 900px;
   min-width: 60%;
   margin: 0 auto;
@@ -50,7 +51,7 @@ export const CartWrapper = styled.p`
   justify-content: flex-end;
 `
 export const CartIcon = styled.img`
-    width: 40%;
+  width: 40%;
 `
 export const CartCounter = styled.span`
   position: absolute;
@@ -94,4 +95,16 @@ export const SearchButton = styled.button`
     background-color: unset;
     color: hotpink;
   }
+`
+export const CartContainer = styled.div.attrs(props => ({
+    height: props.height || '0px'
+}))`
+  position: absolute;
+  right: 0;
+  height: ${props => props.height};
+  width: 500px;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: pink;
 `

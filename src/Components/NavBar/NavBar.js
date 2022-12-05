@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {
-    AccountSection, CartCounter,
+    AccountSection, CartContainer, CartCounter,
     CartIcon, CartWrapper,
     HomeLink,
     HomeLinkRight, InnerContainer,
@@ -11,9 +11,55 @@ import {
 } from "./NavBarStyles";
 
 import CartImage from '../../Assets/shopping-cart.png'
+import CartProductCard from "../CartProductCard";
+import {useProfileContext} from "../../Hooks/Profile";
+
 const NavBar = () => {
+    const {cart} = useProfileContext();
     const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
     const [cartCount, setCartCount] = useState(100); // todo: make cart state global
+    console.log(cart.length);
+    const [cartOpened, setCartOpened] = useState(false);
+
+    const cartArray = [
+        {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        }, {
+            productId: '12345',
+            item: "Item"
+        },
+    ]
+    const mapCart = cartArray.map(item => {
+        return <CartProductCard {...item}/>
+    })
     return (
         <NavBarContainer>
             <InnerContainer>
@@ -29,9 +75,14 @@ const NavBar = () => {
                     </SearchContainer>
                     <CartWrapper>
                         <CartIcon src={CartImage}/>
-                        {cartCount > 0 && <CartCounter>{cartCount}</CartCounter>}
+                        {(cart !== null && cart.length > 0) && <CartCounter>{cart.length}</CartCounter>}
                     </CartWrapper>
                 </NavContainer>
+                {cartOpened && (
+                    <CartContainer height={"500px"}>
+                        {mapCart}
+                    </CartContainer>
+                )}
             </InnerContainer>
 
 

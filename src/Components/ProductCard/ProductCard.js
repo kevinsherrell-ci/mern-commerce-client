@@ -7,12 +7,22 @@ import {
     ProductImage, ProductLink
 } from "./ProductCardStyles";
 
-const ProductCard = (props)=>{
-    const {id,api_featured_image, brand, description, image_link, name, price, rating} = props;
+import {useProfileContext} from '../../Hooks/Profile';
+
+const ProductCard = (props) => {
+    const {cart, addToCart} = useProfileContext();
+    const {id, api_featured_image, brand, description, image_link, name, price, rating} = props;
+    const cartObject = {
+        id: id,
+        api_featured_image: api_featured_image,
+        brand: brand,
+        name: name,
+        price: price
+    }
     return (
         <ProductCardContainer>
             <ImageSection>
-                <ProductImage src={api_featured_image}  alt=""/>
+                <ProductImage src={api_featured_image} alt=""/>
             </ImageSection>
             <InfoSection>
                 <BrandHeader>{brand}</BrandHeader>
@@ -20,7 +30,7 @@ const ProductCard = (props)=>{
             </InfoSection>
             <PriceSection>
                 <Price>${price}</Price>
-                <AddToCard>Add to Cart</AddToCard>
+                <AddToCard onClick={() => addToCart(cartObject)}>Add to Cart</AddToCard>
             </PriceSection>
         </ProductCardContainer>
     )
