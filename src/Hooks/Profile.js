@@ -6,7 +6,13 @@ export const ProfileProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     console.log("Profile", cart);
     const addToCart = (data) => {
-        setCart([...cart, data]);
+        const existingItem = cart.find(item => item.id === data.id);
+        if (existingItem === undefined || existingItem === null) {
+
+            setCart([...cart, data]);
+            return;
+        }
+        existingItem.qty++;
     }
 
     return (

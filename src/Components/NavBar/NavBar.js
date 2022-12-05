@@ -19,7 +19,7 @@ const NavBar = () => {
     const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
     const [cartCount, setCartCount] = useState(100); // todo: make cart state global
     console.log(cart.length);
-    const [cartOpened, setCartOpened] = useState(false);
+    const [cartOpened, setCartOpened] = useState(true);
 
     const cartArray = [
         {
@@ -57,7 +57,7 @@ const NavBar = () => {
             item: "Item"
         },
     ]
-    const mapCart = cartArray.map(item => {
+    const mapCart = cart.map(item => {
         return <CartProductCard {...item}/>
     })
     return (

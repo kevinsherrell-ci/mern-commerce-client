@@ -59,7 +59,8 @@ export const CartCounter = styled.span`
   top: 0;
   background-color: pink;
   border-radius: 50%;
-  font-size: .6em;
+  font-size: .7em;
+  font-weight: bold;
   padding: 3px;
 `
 export const SearchContainer = styled.div`

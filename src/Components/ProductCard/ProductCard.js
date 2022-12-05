@@ -17,7 +17,8 @@ const ProductCard = (props) => {
         api_featured_image: api_featured_image,
         brand: brand,
         name: name,
-        price: price
+        price: price,
+        qty: 1
     }
     return (
         <ProductCardContainer>
