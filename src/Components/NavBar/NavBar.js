@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {
-    AccountSection,
-    CartIcon,
+    AccountSection, CartCounter,
+    CartIcon, CartWrapper,
     HomeLink,
     HomeLinkRight, InnerContainer,
     NavBarContainer,
@@ -10,8 +10,10 @@ import {
     SearchContainer, SearchInput
 } from "./NavBarStyles";
 
+import CartImage from '../../Assets/shopping-cart.png'
 const NavBar = () => {
-    const [loggedIn, setLoggedin] = useState(false);
+    const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
+    const [cartCount, setCartCount] = useState(45); // todo: make cart state global
     return (
         <NavBarContainer>
             <InnerContainer>
@@ -25,7 +27,10 @@ const NavBar = () => {
                         <SearchInput type="text" placeholder={'search for prduct'}/>
                         <SearchButton>Search</SearchButton>
                     </SearchContainer>
-                    <CartIcon>Cart Icon</CartIcon>
+                    <CartWrapper>
+                        <CartIcon src={CartImage}/>
+                        {cartCount > 0 && <CartCounter>{cartCount}</CartCounter>}
+                    </CartWrapper>
                 </NavContainer>
             </InnerContainer>
 

@@ -39,11 +39,24 @@ export const NavContainer = styled.nav`
   align-items: flex-start;
   min-height: 55px;
 `
-export const CartIcon = styled.p`
+export const CartWrapper = styled.p`
+  position: relative;
   flex-basis: 10%;
   align-self: center;
   display: flex;
   justify-content: flex-end;
+`
+export const CartIcon = styled.img`
+    width: 40%;
+`
+export const CartCounter = styled.span`
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: pink;
+  border-radius: 50%;
+  font-size: .6em;
+  padding: 3px;
 `
 export const SearchContainer = styled.div`
   flex-basis: 40%;

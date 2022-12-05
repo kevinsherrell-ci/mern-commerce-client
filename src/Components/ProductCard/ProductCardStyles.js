@@ -5,7 +5,7 @@ export const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: start;
-  height: 140px;
+  height: 175px;
   margin-bottom: 20px;
   border-bottom: 1px solid pink;
   max-width: 800px;
@@ -27,7 +27,7 @@ export const InfoSection = styled.div`
 export const ProductImage = styled.img`
   display: block;
   width: 60%;
-  height: 100%;
+  //height: 100%;
 `
 export const PriceSection = styled.div`
   display: flex;

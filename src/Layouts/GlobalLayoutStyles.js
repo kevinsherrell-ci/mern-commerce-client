@@ -18,4 +18,6 @@ export const InnerContainer = styled.div`
 export const MainContainer = styled.div`
   display: flex;
 `
-export const ContentContainer = styled.div``
+export const ContentContainer = styled.div`
+width: 80%;
+`
