@@ -2,9 +2,12 @@ import styled from 'styled-components';
 import {Link} from "react-router-dom";
 
 export const NavBarContainer = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   margin: 10px 0;
+  background-color: white;
 `
 export const InnerContainer = styled.div`
   max-width: 900px;
