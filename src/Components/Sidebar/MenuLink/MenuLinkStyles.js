@@ -32,7 +32,7 @@ export const MenuIcon = styled.img.attrs(props => ({
     }
 ))`
   position: absolute;
-  right: 10px;
+  left: 100px;
   width: 10px;
   height: 10px;
   transform: ${props=>props.transform}

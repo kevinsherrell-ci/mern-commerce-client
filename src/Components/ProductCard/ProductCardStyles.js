@@ -5,7 +5,6 @@ export const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: start;
-  //background-color: green;
   height: 140px;
   margin-bottom: 20px;
   border-bottom: 1px solid pink;
@@ -16,7 +15,6 @@ export const ImageSection = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  //background-color: pink;
   width: 20%;
   height: 100%;
 
@@ -30,15 +28,15 @@ export const ProductImage = styled.img`
   display: block;
   width: 60%;
   height: 100%;
-  //padding: 40px;
 `
 export const PriceSection = styled.div`
   display: flex;
   flex-direction: column;
-  //align-items: center;
+  align-items: flex-end;
+  justify-content: center;
   width: 20%;
   height: 100%;
-  padding: 40px;
+  //padding: 40px;
 
 `
 export const Price = styled.p`

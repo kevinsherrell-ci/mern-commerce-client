@@ -4,9 +4,16 @@ export const GlobalContainer = styled.div`
   //background-color: pink;
   display: flex;
   flex-direction: column;
-  width: 85%;
-  padding-left: 2%;
+  width: 100vw;
+  //padding-left: 2%;
+  margin: 0 auto;
   
+`
+export const InnerContainer = styled.div`
+  display: flex;
+  max-width: 900px;
+  min-width: 60%;
+  margin: 0 auto;
 `
 export const MainContainer = styled.div`
   display: flex;

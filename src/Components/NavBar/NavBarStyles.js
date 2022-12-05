@@ -6,14 +6,26 @@ export const NavBarContainer = styled.div`
   flex-direction: column;
   margin: 10px 0;
 `
+export const InnerContainer = styled.div`
+  max-width: 900px;
+  min-width: 60%;
+  margin: 0 auto;
+`
 export const AccountSection = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 5px;
 `
 export const HomeLink = styled(Link)`
-  font-size: 1.5em;
-  width: 90%;
+  //background-color: green;
+  //position: absolute;
+  //left: 0;
+  flex-basis: 50%;
+
+  display: block;
+  font-size: 2.5em;
+  width: 35%;
+  height: 100%;
 `
 export const HomeLinkRight = styled.span`
   color: hotpink;
@@ -21,19 +33,24 @@ export const HomeLinkRight = styled.span`
 
 `
 export const NavContainer = styled.nav`
+  //position: relative;
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  min-height: 55px;
 `
 export const CartIcon = styled.p`
-  width: 10%;
-  align-self: flex-end;
+  flex-basis: 10%;
+  align-self: center;
   display: flex;
   justify-content: flex-end;
 `
 export const SearchContainer = styled.div`
+  flex-basis: 40%;
   position: relative;
-  margin: 15px 0;
-  width: 250px;
+  margin: 15px 0 0 30px;
+  //width: 250px;
+  min-height: 25px;
 `
 export const SearchInput = styled.input`
   position: absolute;
@@ -55,7 +72,8 @@ export const SearchButton = styled.button`
   color: white;
   background-color: hotpink;
   vertical-align: middle;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
     background-color: unset;
     color: hotpink;
