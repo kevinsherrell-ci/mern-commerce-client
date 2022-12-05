@@ -108,8 +108,8 @@ export const CartContainer = styled.div.attrs(props => ({
   right: 0;
   height: ${props => props.height};
   width: 500px;
-  border: none;
+  border: 1px solid hotpink;
   border-radius: 10px;
-  padding: 5px;
-  background-color: pink;
+  padding: 20px;
+  background-color: white;
 `
