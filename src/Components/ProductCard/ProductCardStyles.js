@@ -48,6 +48,11 @@ export const AddToCard = styled.button`
   border-radius: 10px;
   padding: 10px;
   width: 100px;
+  &:hover{
+    cursor: pointer;
+    background-color: grey;
+    color: white;
+  }
 `
 export const BrandHeader = styled.h3`
   font-style: italic;

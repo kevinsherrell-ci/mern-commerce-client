@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {
     AccountSection, CartContainer, CartCounter,
     CartIcon, CartWrapper,
@@ -15,7 +15,7 @@ import CartProductCard from "../CartProductCard";
 import {useProfileContext} from "../../Hooks/Profile";
 
 const NavBar = () => {
-    const {cart, getCartTotal} = useProfileContext();
+    const {cart, getCartTotal, total} = useProfileContext();
     const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
     const [cartCount, setCartCount] = useState(100); // todo: make cart state global
     console.log(cart.length);
@@ -58,8 +58,9 @@ const NavBar = () => {
         },
     ]
     const mapCart = cart.map(item => {
-        return <CartProductCard {...item}/>
+        return (item.qty > 0) && <CartProductCard {...item}/>
     })
+
     return (
         <NavBarContainer>
             <InnerContainer>
@@ -81,7 +82,7 @@ const NavBar = () => {
                 {cartOpened && (
                     <CartContainer height={"500px"}>
                         {mapCart}
-                        <p>Total Price: {getCartTotal()}</p>
+                        <p>Total Price: ${total}</p>
                     </CartContainer>
                 )}
             </InnerContainer>
