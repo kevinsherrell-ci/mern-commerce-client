@@ -13,7 +13,7 @@ import {
 import CartImage from '../../Assets/shopping-cart.png'
 const NavBar = () => {
     const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
-    const [cartCount, setCartCount] = useState(45); // todo: make cart state global
+    const [cartCount, setCartCount] = useState(100); // todo: make cart state global
     return (
         <NavBarContainer>
             <InnerContainer>

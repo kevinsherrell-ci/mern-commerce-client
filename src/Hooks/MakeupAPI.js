@@ -11,6 +11,7 @@ export const MakeupProvider = (props) => {
     console.log("SELECTED PRODUCT", selectedProduct);
     const url = 'http://makeup-api.herokuapp.com/api/v1/products.json'
 
+    // search products by query
     const getData = (queryString) => {
         const options = {
             method: "GET",
@@ -38,10 +39,24 @@ export const MakeupProvider = (props) => {
                 setErrors(err);
             })
     }
+    const getAllProducts = ()=>{
+        const options = {
+            method: "GET"
+        }
+        fetch(`${url}`, options)
+            .then(response=>response.json())
+            .then(data=>{
+                setData(data);
+            })
+            .catch(err=>{
+                setErrors(err);
+            })
+    }
     return (
         <MakeupContext.Provider value={{
             data: data,
             selectedProduct: selectedProduct,
+            getAllProducts: getAllProducts,
             errors: errors,
             getData: getData,
             getDataById: getDataById,
