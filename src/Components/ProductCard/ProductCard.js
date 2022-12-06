@@ -10,6 +10,7 @@ import {
 import {useProfileContext} from '../../Hooks/Profile';
 
 const ProductCard = (props) => {
+    // console.log("PRODUCT CARD");
     const {cart, addToCart} = useProfileContext();
     const {id, api_featured_image, brand, description, image_link, name, price, rating} = props;
     const cartObject = {

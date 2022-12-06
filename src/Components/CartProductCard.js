@@ -10,26 +10,35 @@ import {useProfileContext} from "../Hooks/Profile";
 import {useEffect, useState} from "react";
 
 const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
-    const {updateQty} = useProfileContext();
-    const [_qty, _setQty] = useState(qty);
-    console.log("quantity PRODUCTCARD", qty);
-    const adjustQty = (e) => {
-        let quantity = qty;
+    console.log("CART PRODUCT CARD")
+    const {updateQty, removeItem} = useProfileContext();
+    const [_qty, _setQty] = useState(1);
+    console.log(_qty);
 
+    const adjustQty = (e) => {
+        let quantity = _qty;
         switch (e.target.name) {
 
             case "decrease":
-                quantity--
-                (qty > 0) && updateQty(id,quantity);
+                console.log("decrease qty");
+                (_qty > 0) && quantity--;
+                _setQty(quantity);
+                updateQty(id, _qty)
+
                 break;
             case "increase":
+                console.log("increase qty");
                 quantity++
-                updateQty(id,quantity);
+                _setQty(quantity);
+                updateQty(id, _qty)
+
                 break;
         }
     }
     useEffect(() => {
-
+            if(_qty === 0){
+                removeItem(id);
+            }
     }, [_qty])
     return (
         <CartProductCardContainer>
@@ -43,7 +52,7 @@ const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
                 </NameBrand>
                 <Quantity>
                     <QuantityLabel>Quantity: </QuantityLabel>
-                    <QuantityInput type={"number"} value={qty} onChange={(e) => _setQty(e.target.value)}/>
+                    <QuantityInput type={"number"} value={_qty} onChange={(e) => _setQty(e.target.value)}/>
                     <DecreaseButton name={'decrease'} onClick={(e) => adjustQty(e)}>-</DecreaseButton>
                     <IncreaseButton name={'increase'} onClick={(e) => adjustQty(e)}>+</IncreaseButton>
                 </Quantity>

@@ -13,10 +13,8 @@ import {
 import {useProfileContext} from "../../Hooks/Profile";
 
 const ProductDetail = (props) => {
-    console.log("product detail has rendered");
-    console.log(props);
+    console.log("PRODUCT DETAIL");
     const id = useParams().id;
-    console.log(id);
     const {getDataById, selectedProduct} = useMakeupContext();
     const {addToCart} = useProfileContext();
     const {api_featured_image, brand, category, description, name, price, product_type, website_link} = selectedProduct;

@@ -15,18 +15,17 @@ import CartProductCard from "../CartProductCard";
 import {useProfileContext} from "../../Hooks/Profile";
 
 const NavBar = () => {
-    const {cart, getCartTotal, total} = useProfileContext();
+    console.log("NAVBAR");
+    const {cart, total} = useProfileContext();
     const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
     const [cartCount, setCartCount] = useState(100); // todo: make cart state global
-    console.log(cart.length);
     const [cartOpened, setCartOpened] = useState(false);
 
     const mapCart = cart.map(item => {
-        return (item.qty > 0) && <CartProductCard {...item}/>
+        return (item.qty > 0) && <CartProductCard {...item} key={item.id}/>
     })
     useEffect(()=>{
-
-    }, [cart.length])
+    }, [cart])
     return (
         <NavBarContainer>
             <InnerContainer>

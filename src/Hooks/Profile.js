@@ -5,8 +5,9 @@ export const ProfileContext = createContext('');
 export const ProfileProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
-    console.log("Profile", cart);
+    console.log(cart);
     const addToCart = (data) => {
+        console.log("adding to cart");
         const existingItem = cart.find(item => item.id === data.id);
         if (existingItem === undefined || existingItem === null) {
 
@@ -16,6 +17,7 @@ export const ProfileProvider = ({children}) => {
         existingItem.qty++;
     }
     const getCartTotal = () => {
+        console.log("getting cart total");
         let totalPrice = 0;
         cart.forEach(item => {
             totalPrice += (item.qty * item.price);
@@ -23,29 +25,27 @@ export const ProfileProvider = ({children}) => {
         setTotal(totalPrice);
     }
     const updateQty = (id, qty) => {
+        console.log("updating quantity", qty);
+        console.log("ID: " + id);
+        console.log("quantity: " + qty);
         const currentItem = cart.find(item => item.id === id);
         currentItem.qty = qty;
-        if (currentItem.qty < 1) {
-            console.log("cart item quantity is at 0");
-            removeItem(id);
-        }
         getCartTotal();
-        console.log(currentItem);
 
     }
     const removeItem = (id) => {
-        console.log('removing item');
+        console.log("removing item from cart");
+        console.log(cart);
         const cartTemp = [...cart];
-        console.log("carttemp", cartTemp);
         const filtered = cartTemp.filter(item => item.id !== id);
         setCart(filtered);
-        console.log(filtered);
     }
 
     return (
         <ProfileContext.Provider value={{
             cart: cart,
             total: total,
+            removeItem: removeItem,
             addToCart: addToCart,
             getCartTotal: getCartTotal,
             updateQty: updateQty
