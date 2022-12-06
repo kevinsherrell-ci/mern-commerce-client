@@ -24,7 +24,9 @@ const NavBar = () => {
     const mapCart = cart.map(item => {
         return (item.qty > 0) && <CartProductCard {...item}/>
     })
+    useEffect(()=>{
 
+    }, [cart.length])
     return (
         <NavBarContainer>
             <InnerContainer>
