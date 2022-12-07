@@ -7,8 +7,10 @@ import ProductDetail from "./Pages/Product/ProductDetail";
 import AuthLayout from "./Layouts/AuthLayout";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import {useAuthContext} from "./Hooks/Auth";
 
 function App() {
+    const Auth = useAuthContext();
     const router = createBrowserRouter([
         {
             path: '/',
