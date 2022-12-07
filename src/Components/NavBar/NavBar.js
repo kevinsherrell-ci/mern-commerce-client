@@ -6,13 +6,16 @@ import {
     HomeLink,
     HomeLinkRight, InnerContainer,
     NavBarContainer,
-    NavContainer, SearchButton,
-    SearchContainer, SearchInput
+    NavContainer, RegisterLink, SearchButton,
+    SearchContainer, SearchInput, SignInLink
 } from "./NavBarStyles";
 
 import CartImage from '../../Assets/shopping-cart.png'
 import CartProductCard from "../CartProductCard";
 import {useProfileContext} from "../../Hooks/Profile";
+
+
+
 
 const NavBar = () => {
     console.log("NAVBAR");
@@ -30,7 +33,7 @@ const NavBar = () => {
         <NavBarContainer>
             <InnerContainer>
                 <AccountSection>
-                    <p>Hi! <span>Sign In</span>/ <span>Register</span></p>
+                    <p>Hi! <SignInLink to={'/auth/login'}>Sign In</SignInLink>/ <RegisterLink to={'/auth/register'}>Register</RegisterLink></p>
                     {loggedIn && <button>Logout</button>}
                 </AccountSection>
                 <NavContainer>

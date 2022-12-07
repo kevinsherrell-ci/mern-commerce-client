@@ -2,20 +2,29 @@ import {
     CreateAccountLink,
     CreateAccountText,
     FormInput,
-    FormRow,
+    FormRow, GuestLink, GuestText,
     LoginContainer,
     Submit
 } from "./LoginStyles";
 import {useState} from "react";
+import {FormHeader} from "../../Layouts/AuthLayoutStyles";
 
 const Login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
+    const loginObject = {
+        email: email,
+        password: password
+    }
+
     return (
 
         <LoginContainer>
+            <FormRow>
+                <FormHeader>Login</FormHeader>
+            </FormRow>
             <FormRow>
                 <FormInput type={"text"} onClick={(e) => setEmail(e.target.value)} placeholder={"E-Mail"}/>
             </FormRow>
@@ -30,6 +39,15 @@ const Login = () => {
                 </CreateAccountText>
 
             </FormRow>
+            {/*<FormRow>*/}
+            {/*    <GuestText>*/}
+            {/*        Just browsing?*/}
+            {/*    </GuestText>*/}
+            {/*    <GuestLink to={'/'}>*/}
+            {/*        Continue as Guest*/}
+            {/*    </GuestLink>*/}
+            {/*</FormRow>*/}
+
         </LoginContainer>
     )
 }

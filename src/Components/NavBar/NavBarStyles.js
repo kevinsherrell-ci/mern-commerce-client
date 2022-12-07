@@ -113,3 +113,16 @@ export const CartContainer = styled.div.attrs(props => ({
   padding: 20px;
   background-color: white;
 `
+export const SignInLink = styled(Link)`
+    color: hotpink;
+    &:hover{
+      border-bottom: 1px solid black;
+
+    }
+`
+export const RegisterLink = styled(Link)`
+    color: hotpink;
+    &:hover{
+      border-bottom: 1px solid black;
+    }
+`
