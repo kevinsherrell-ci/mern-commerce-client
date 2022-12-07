@@ -19,6 +19,7 @@ const linkFormat = [
 ]
 
 const Sidebar = ({width}) => {
+    console.log("SIDEBAR");
     const mapLinks = linkFormat.map(productType=>{
         const type = Object.keys(productType)[0];
         const categories = Object.values(productType);

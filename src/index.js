@@ -3,13 +3,21 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {MakeupProvider} from "./Hooks/MakeupAPI";
+import {ProfileProvider} from "./Hooks/Profile";
+import {AuthProvider} from "./Hooks/Auth";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <MakeupProvider>
-            <App/>
-        </MakeupProvider>
+        <AuthProvider>
+            <ProfileProvider>
+                <MakeupProvider>
+                    <App/>
+                </MakeupProvider>
+            </ProfileProvider>
+        </AuthProvider>
+
+
     </React.StrictMode>
 );
 

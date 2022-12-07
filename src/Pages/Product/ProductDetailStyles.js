@@ -50,4 +50,9 @@ export const AddToCart = styled.button`
   border-radius: 10px;
   padding: 10px;
   width: 120px;
+  &:hover{
+    cursor: pointer;
+    background-color: grey;
+    color: white;
+  }
 `

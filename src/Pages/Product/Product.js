@@ -12,19 +12,14 @@ const Product = () => {
     const query = queryParams.toString();
     const [products, setProducts] = useState([]);
     const {getData, data} = useContext(MakeupContext);
-    console.log(getData, data);
 
     useEffect(() => {
-        console.log("USE STATE IS RUNNING");
         getData(query);
         setProducts(data);
 
     }, [query]);
-    console.log("Product state", products);
     const mapData = data.map(product => {
-        console.log("this should be mapping data....")
-        console.log(product);
-        return <ProductCard {...product}/>
+        return <ProductCard {...product} key={product.id}/>
     })
     return (
         <ProductPageContainer>

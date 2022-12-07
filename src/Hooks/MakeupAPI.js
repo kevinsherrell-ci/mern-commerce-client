@@ -5,10 +5,9 @@ export const MakeupContext = createContext('');
 export const MakeupProvider = (props) => {
     const {children} = props;
     const [data, setData] = useState([]);
+    const [allProducts, setAllProducts] = useState([]); // temporary until pagination is set up
     const [selectedProduct, setSelectedProduct] = useState({});
     const [errors, setErrors] = useState();
-    console.log(data);
-    console.log("SELECTED PRODUCT", selectedProduct);
     const url = 'http://makeup-api.herokuapp.com/api/v1/products.json'
 
     // search products by query
@@ -39,16 +38,16 @@ export const MakeupProvider = (props) => {
                 setErrors(err);
             })
     }
-    const getAllProducts = ()=>{
+    const getAllProducts = () => {
         const options = {
             method: "GET"
         }
         fetch(`${url}`, options)
-            .then(response=>response.json())
-            .then(data=>{
-                setData(data);
+            .then(response => response.json())
+            .then(data => {
+                setAllProducts(data);
             })
-            .catch(err=>{
+            .catch(err => {
                 setErrors(err);
             })
     }
@@ -56,6 +55,7 @@ export const MakeupProvider = (props) => {
         <MakeupContext.Provider value={{
             data: data,
             selectedProduct: selectedProduct,
+            allProducts: allProducts,
             getAllProducts: getAllProducts,
             errors: errors,
             getData: getData,

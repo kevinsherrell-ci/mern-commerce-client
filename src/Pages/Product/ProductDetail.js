@@ -1,6 +1,6 @@
 import {useLocation, useParams} from "react-router-dom";
 import {useContext, useEffect} from "react";
-import {MakeupContext} from "../../Hooks/MakeupAPI";
+import {MakeupContext, useMakeupContext} from "../../Hooks/MakeupAPI";
 import {
     AddToCart, Brand,
     Description, DescriptionHeader,
@@ -10,15 +10,23 @@ import {
     ImageWrapper, Name, Price,
     ProductDetailContainer, ProductImage, WebsiteLink
 } from "./ProductDetailStyles";
+import {useProfileContext} from "../../Hooks/Profile";
 
 const ProductDetail = (props) => {
-    console.log("product detail has rendered");
-    console.log(props);
+    console.log("PRODUCT DETAIL");
     const id = useParams().id;
-    console.log(id);
-    const {getDataById, selectedProduct} = useContext(MakeupContext);
+    const {getDataById, selectedProduct} = useMakeupContext();
+    const {addToCart} = useProfileContext();
     const {api_featured_image, brand, category, description, name, price, product_type, website_link} = selectedProduct;
 
+    const cartObject = {
+        id: id,
+        api_featured_image: api_featured_image,
+        brand: brand,
+        name: name,
+        price: price,
+        qty: 1
+    }
     useEffect(() => {
         getDataById(id);
     }, [id])
@@ -38,7 +46,7 @@ const ProductDetail = (props) => {
                 <DescriptionHeader>Description</DescriptionHeader>
                 <Description>{description}</Description>
                 <Price>${price}</Price>
-                <AddToCart>Add to Cart</AddToCart>
+                <AddToCart onClick={()=>addToCart(cartObject)}>Add to Cart</AddToCart>
             </DetailRight>
         </ProductDetailContainer>
     )

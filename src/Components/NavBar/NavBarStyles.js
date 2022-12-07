@@ -10,6 +10,7 @@ export const NavBarContainer = styled.div`
   background-color: white;
 `
 export const InnerContainer = styled.div`
+  position: relative;
   max-width: 900px;
   min-width: 60%;
   margin: 0 auto;
@@ -50,7 +51,11 @@ export const CartWrapper = styled.p`
   justify-content: flex-end;
 `
 export const CartIcon = styled.img`
-    width: 40%;
+  width: 40%;
+  &:hover{
+    cursor: pointer;
+    width: 43%;
+  }
 `
 export const CartCounter = styled.span`
   position: absolute;
@@ -58,7 +63,8 @@ export const CartCounter = styled.span`
   top: 0;
   background-color: pink;
   border-radius: 50%;
-  font-size: .6em;
+  font-size: .7em;
+  font-weight: bold;
   padding: 3px;
 `
 export const SearchContainer = styled.div`
@@ -94,4 +100,29 @@ export const SearchButton = styled.button`
     background-color: unset;
     color: hotpink;
   }
+`
+export const CartContainer = styled.div.attrs(props => ({
+    height: props.height || '0px'
+}))`
+  position: absolute;
+  right: 0;
+  height: ${props => props.height};
+  width: 500px;
+  border: 1px solid hotpink;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+`
+export const SignInLink = styled(Link)`
+    color: hotpink;
+    &:hover{
+      border-bottom: 1px solid black;
+
+    }
+`
+export const RegisterLink = styled(Link)`
+    color: hotpink;
+    &:hover{
+      border-bottom: 1px solid black;
+    }
 `
