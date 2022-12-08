@@ -10,9 +10,9 @@ const Home = () => {
     const {allProducts, getAllProducts} = useContext(MakeupContext);
 
     useEffect(() => {
-        if (allProducts === null || allProducts.length === 0) {
-            getAllProducts();
-        }
+        // if (allProducts === null || allProducts.length === 0) {
+        //     getAllProducts();
+        // }
 
     }, [])
     const mapProducts = allProducts.map(product => {

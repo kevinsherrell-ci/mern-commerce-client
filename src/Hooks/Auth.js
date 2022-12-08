@@ -44,9 +44,11 @@ export const AuthProvider = ({children}) => {
         }
     }
     const logout = ()=>{
+        console.log(URL);
         console.log("logout");
         const options = {
-            method: "DELETE"
+            method: "DELETE",
+            credentials: 'include'
         }
         fetch(`${URL}/users/logout`, options)
             .then(response=>response.json())
