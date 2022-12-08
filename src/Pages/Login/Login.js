@@ -8,9 +8,10 @@ import {
 } from "./LoginStyles";
 import {useState} from "react";
 import {FormHeader} from "../../Layouts/AuthLayoutStyles";
+import {useAuthContext} from "../../Hooks/Auth";
 
 const Login = () => {
-
+    const {login} = useAuthContext();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -26,14 +27,14 @@ const Login = () => {
                 <FormHeader>Login</FormHeader>
             </FormRow>
             <FormRow>
-                <FormInput type={"text"} onClick={(e) => setEmail(e.target.value)} placeholder={"E-Mail"}/>
+                <FormInput type={"text"} onChange={(e) => setEmail(e.target.value)} placeholder={"E-Mail"}/>
             </FormRow>
             <FormRow>
-                <FormInput type={"text"} onClick={(e) => setPassword(e.target.value)} placeholder={"Password"}/>
+                <FormInput type={"text"} onChange={(e) => setPassword(e.target.value)} placeholder={"Password"}/>
             </FormRow>
             <FormRow direction={"column"}>
 
-                <Submit>Login</Submit>
+                <Submit onClick={()=>login(loginObject)}>Login</Submit>
                 <CreateAccountText>
                     Don't have an account? <CreateAccountLink to={'/auth/register'}>Create Account</CreateAccountLink>
                 </CreateAccountText>

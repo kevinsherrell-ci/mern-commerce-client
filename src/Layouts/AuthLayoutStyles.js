@@ -11,6 +11,7 @@ export const AuthContainer = styled.div`
 
 `
 export const InnerContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,14 +23,15 @@ export const InnerContainer = styled.div`
 export const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  //align-items: center;
   justify-content: center;
   width: 50%;
-  height: 200px;
+  height: 100%;
 `
 export const AuthSub = styled.p`
   font-style: italic;
   color: pink;
+  width: 100%;
 `
 export const APILink = styled.a`
   color: white;
@@ -40,7 +42,7 @@ export const APILink = styled.a`
   }
 `
 export const Logo = styled.h1`
-  text-align: center;
+  //text-align: center;
   font-size: 2.5em;
   color: white;
 `
@@ -56,21 +58,24 @@ export const ContentWrapper = styled.div`
   //margin-bottom: 5px;
 `
 export const GuestText = styled.p`
-    color: pink;
-    font-size: 1.2em;
-    //margin: 0 auto;
+  position: absolute;
+  top: 40%;
+  color: pink;
+  font-size: 1.2em;
+
 `
 export const GuestLink = styled(Link)`
   color: white;
   //font-size: 1.1em;
   text-decoration: underline;
   margin: 0 auto;
-  &:hover{
+
+  &:hover {
     color: hotPink;
   }
-  
+
 `
 export const FormHeader = styled.h1`
-    color: pink;
-    margin-left: auto;
+  color: pink;
+  margin-left: auto;
 `
