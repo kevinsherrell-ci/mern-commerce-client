@@ -11,11 +11,12 @@ import {
 import {useState} from "react";
 import {useAuthContext} from "../../Hooks/Auth";
 import {useProfileContext} from "../../Hooks/Profile";
+import {redirect} from "react-router-dom";
 
 const Register = () => {
     const Auth = useAuthContext();
     const profile = useProfileContext();
-    const {register} = Auth;
+    const {register, login} = Auth;
     const {createProfile} = profile;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -50,6 +51,8 @@ const Register = () => {
                     try {
                         const registerUser = await register(registerObject);
                         createProfile(registerUser.result.insertedId);
+                        login({email, password});
+
                     } catch (err) {
                         console.log(err);
                     }

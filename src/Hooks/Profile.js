@@ -6,6 +6,7 @@ const URL = process.env.REACT_APP_ENDPOINT;
 export const ProfileProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
+    const [profile, setProfile] = useState({});
     console.log(cart)
 
     const createProfile = async (userId) => {
@@ -23,6 +24,12 @@ export const ProfileProvider = ({children}) => {
             .then(response => response.json())
             .then(response => console.log(response));
 
+    }
+    const getProfile = async (userId) =>{
+        const _profile = await fetch(`${URL}/profiles/${userId}`);
+        if(_profile.success){
+            setProfile(_profile.result);
+        }
     }
     const addToCart = (data) => {
         console.log("adding to cart");
@@ -68,7 +75,8 @@ export const ProfileProvider = ({children}) => {
             addToCart: addToCart,
             getCartTotal: getCartTotal,
             updateQty: updateQty,
-            createProfile: createProfile
+            createProfile: createProfile,
+            getProfile: getProfile
         }}>
             {children}
         </ProfileContext.Provider>

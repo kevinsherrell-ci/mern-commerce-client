@@ -1,5 +1,6 @@
 import {createContext, useContext, useState} from 'react';
 import {useProfileContext} from "./Profile";
+import {redirect, useNavigate} from "react-router-dom";
 
 export const AuthContext = createContext('');
 
@@ -41,13 +42,17 @@ export const AuthProvider = ({children}) => {
             }
             const loginUser = await fetch(`${URL}/users/login`, options);
             const result = await loginUser.json();
-            setLoggedIn(true);
-            setCurrentUser(result.result);
+            console.log(result.success);
+            if (result.success) {
+                setLoggedIn(true);
+                setCurrentUser(result.result);
+            }
+            return result.success;
         } catch (err) {
             setErrors(errors);
         }
     }
-    const logout = ()=>{
+    const logout = () => {
         console.log(URL);
         console.log("logout");
         const options = {
@@ -55,12 +60,12 @@ export const AuthProvider = ({children}) => {
             credentials: 'include'
         }
         fetch(`${URL}/users/logout`, options)
-            .then(response=>response.json())
-            .then((response)=>{
+            .then(response => response.json())
+            .then((response) => {
                 setLoggedIn(false);
                 console.log(response);
             })
-            .catch(errors=>{
+            .catch(errors => {
                 setErrors(errors);
             })
     }

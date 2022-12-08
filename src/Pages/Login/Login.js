@@ -9,8 +9,10 @@ import {
 import {useState} from "react";
 import {FormHeader} from "../../Layouts/AuthLayoutStyles";
 import {useAuthContext} from "../../Hooks/Auth";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const {login} = useAuthContext();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -34,7 +36,13 @@ const Login = () => {
             </FormRow>
             <FormRow direction={"column"}>
 
-                <Submit onClick={()=>login(loginObject)}>Login</Submit>
+                <Submit onClick={async () => {
+                    const loginUser = await login(loginObject);
+                    if (loginUser) {
+                        navigate('/');
+                    }
+
+                }}>Login</Submit>
                 <CreateAccountText>
                     Don't have an account? <CreateAccountLink to={'/auth/register'}>Create Account</CreateAccountLink>
                 </CreateAccountText>
