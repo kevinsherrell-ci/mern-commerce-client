@@ -1,10 +1,13 @@
 import {createContext, useContext, useState} from 'react';
+import {useProfileContext} from "./Profile";
 
 export const AuthContext = createContext('');
 
 const URL = process.env.REACT_APP_ENDPOINT;
 console.log(URL);
 export const AuthProvider = ({children}) => {
+    const profile = useProfileContext();
+    const {createProfile} = profile;
     const [loggedIn, setLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState();
     console.log(loggedIn, currentUser);
@@ -21,6 +24,7 @@ export const AuthProvider = ({children}) => {
         const registerUser = await fetch(`${URL}/users/register`, options);
         const result = await registerUser.json();
         console.log(result);
+        return result;
     }
 
     const login = async (obj) => {

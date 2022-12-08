@@ -10,10 +10,13 @@ import {
 } from "./RegisterStyles";
 import {useState} from "react";
 import {useAuthContext} from "../../Hooks/Auth";
+import {useProfileContext} from "../../Hooks/Profile";
 
 const Register = () => {
     const Auth = useAuthContext();
+    const profile = useProfileContext();
     const {register} = Auth;
+    const {createProfile} = profile;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
@@ -43,7 +46,15 @@ const Register = () => {
             </FormRow>
             <FormRow direction={"column"}>
 
-                <Submit onClick={()=>register(registerObject)}>Register</Submit>
+                <Submit onClick={async () => {
+                    try {
+                        const registerUser = await register(registerObject);
+                        createProfile(registerUser.result.insertedId);
+                    } catch (err) {
+                        console.log(err);
+                    }
+
+                }}>Register</Submit>
                 <LoginText>
                     Already have an account? <LoginLink to={'/auth/login'}>Log In!</LoginLink>
                 </LoginText>

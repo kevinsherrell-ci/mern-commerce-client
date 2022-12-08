@@ -2,10 +2,28 @@ import {createContext, useContext, useState} from 'react';
 
 export const ProfileContext = createContext('');
 
+const URL = process.env.REACT_APP_ENDPOINT;
 export const ProfileProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
-    console.log(cart);
+    console.log(cart)
+
+    const createProfile = async (userId) => {
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify({
+                user_id: userId
+            })
+        }
+        fetch(`${URL}/profiles/create`, options)
+            .then(response => response.json())
+            .then(response => console.log(response));
+
+    }
     const addToCart = (data) => {
         console.log("adding to cart");
         const existingItem = cart.find(item => item.id === data.id);
@@ -18,6 +36,7 @@ export const ProfileProvider = ({children}) => {
     }
     const getCartTotal = () => {
         console.log("getting cart total");
+
         let totalPrice = 0;
         cart.forEach(item => {
             totalPrice += (item.qty * item.price);
@@ -48,7 +67,8 @@ export const ProfileProvider = ({children}) => {
             removeItem: removeItem,
             addToCart: addToCart,
             getCartTotal: getCartTotal,
-            updateQty: updateQty
+            updateQty: updateQty,
+            createProfile: createProfile
         }}>
             {children}
         </ProfileContext.Provider>
