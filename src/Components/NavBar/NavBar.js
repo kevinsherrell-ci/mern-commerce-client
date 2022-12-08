@@ -2,9 +2,9 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {
     AccountSection, CartContainer, CartCounter,
-    CartIcon, CartWrapper,
+    CartIcon, CartWrapper, Greeting,
     HomeLink,
-    HomeLinkRight, InnerContainer,
+    HomeLinkRight, InnerContainer, LogOut,
     NavBarContainer,
     NavContainer, RegisterLink, SearchButton,
     SearchContainer, SearchInput, SignInLink
@@ -13,33 +13,45 @@ import {
 import CartImage from '../../Assets/shopping-cart.png'
 import CartProductCard from "../CartProductCard";
 import {useProfileContext} from "../../Hooks/Profile";
-
-
+import {useAuthContext} from "../../Hooks/Auth";
 
 
 const NavBar = () => {
     console.log("NAVBAR");
-    const {cart, total} = useProfileContext();
-    const [loggedIn, setLoggedin] = useState(false); // todo: make logged-in state global
-    const [cartCount, setCartCount] = useState(100); // todo: make cart state global
+    const {cart, total, getProfile, profile} = useProfileContext();
+    const {loggedIn, currentUser, logout} = useAuthContext();
+    console.log(currentUser);
     const [cartOpened, setCartOpened] = useState(false);
 
     const mapCart = cart.map(item => {
         return (item.qty > 0) && <CartProductCard {...item} key={item.id}/>
     })
-    useEffect(()=>{
-    }, [cart])
+    useEffect(() => {
+        console.log(currentUser)
+    }, [cart, loggedIn, currentUser])
+    const displayGreeting = ()=>{
+        if(loggedIn){
+            return (
+                <Greeting>Hi! {currentUser && currentUser.email}
+                </Greeting>
+            )
+        }
+        return (
+            <Greeting>Hi!<SignInLink to={'/auth/login'}>Sign In</SignInLink> / <RegisterLink to={'/auth/register'}>Register</RegisterLink>
+            </Greeting>
+        )
+    }
     return (
         <NavBarContainer>
             <InnerContainer>
                 <AccountSection>
-                    <p>Hi! <SignInLink to={'/auth/login'}>Sign In</SignInLink>/ <RegisterLink to={'/auth/register'}>Register</RegisterLink></p>
-                    {loggedIn && <button>Logout</button>}
+                    {displayGreeting()}
+                    {loggedIn && <LogOut onClick={()=>logout()}>Logout</LogOut>}
                 </AccountSection>
                 <NavContainer>
                     <HomeLink to={'/'}>MERN<HomeLinkRight>commerce</HomeLinkRight> </HomeLink>
                     <SearchContainer>
-                        <SearchInput type="text" placeholder={'search for prduct'}/>
+                        <SearchInput type="text" placeholder={'search for product'}/>
                         <SearchButton>Search</SearchButton>
                     </SearchContainer>
                     <CartWrapper>

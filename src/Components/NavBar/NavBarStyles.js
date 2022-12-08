@@ -126,3 +126,20 @@ export const RegisterLink = styled(Link)`
       border-bottom: 1px solid black;
     }
 `
+export const Greeting = styled.p`
+
+`
+export const LogOut = styled.button`
+  border: 1px solid hotpink;
+  padding: 3px;
+  background-color: white;
+  color: hotpink;
+  width: 100px;
+  margin-left: auto;
+  &:hover{
+    cursor: pointer;
+    color: white;
+    background-color: hotpink;
+    width: 110px;
+  }
+`

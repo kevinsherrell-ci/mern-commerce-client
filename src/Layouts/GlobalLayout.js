@@ -5,8 +5,7 @@ import {ContentContainer, GlobalContainer, InnerContainer, MainContainer} from "
 import {useAuthContext} from "../Hooks/Auth";
 
 const GlobalLayout = () => {
-    const auth =useAuthContext();
-    const {logout} = auth;
+
     return (
         <GlobalContainer>
             <NavBar/>
@@ -19,7 +18,7 @@ const GlobalLayout = () => {
                 </InnerContainer>
 
             </MainContainer>
-<button onClick={()=>logout()}>LOGOUT</button>
+
         </GlobalContainer>
     )
 }

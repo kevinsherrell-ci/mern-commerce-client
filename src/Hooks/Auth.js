@@ -7,12 +7,25 @@ export const AuthContext = createContext('');
 const URL = process.env.REACT_APP_ENDPOINT;
 console.log(URL);
 export const AuthProvider = ({children}) => {
-    const profile = useProfileContext();
-    const {createProfile} = profile;
     const [loggedIn, setLoggedIn] = useState(false);
-    const [currentUser, setCurrentUser] = useState();
-    console.log(loggedIn, currentUser);
+    const [currentUser, setCurrentUser] = useState({});
     const [errors, setErrors] = useState();
+    const getSession = async () => {
+        const options = {
+            method: "POST",
+            credentials: "include"
+        }
+        const reconnect = await fetch(`${URL}/users/reconnect`, options);
+        const result = await reconnect.json();
+        if (Object.keys(result).includes("result")) {
+            setLoggedIn(true);
+            setCurrentUser(result.result);
+            console.log("there is a current user");
+            return result.result;
+        }
+
+    }
+
     const register = async (obj) => {
         console.log(obj);
         const options = {
@@ -63,6 +76,7 @@ export const AuthProvider = ({children}) => {
             .then(response => response.json())
             .then((response) => {
                 setLoggedIn(false);
+                setCurrentUser(null);
                 console.log(response);
             })
             .catch(errors => {
@@ -73,7 +87,10 @@ export const AuthProvider = ({children}) => {
         <AuthContext.Provider value={{
             register: register,
             login: login,
-            logout: logout
+            logout: logout,
+            getSession: getSession,
+            loggedIn: loggedIn,
+            currentUser: currentUser
         }}>
             {children}
         </AuthContext.Provider>

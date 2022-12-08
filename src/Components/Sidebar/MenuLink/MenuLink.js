@@ -3,7 +3,6 @@ import {useState} from "react";
 
 const icon = require('../../../Assets/upload.png');
 const MenuLink = (props) => {
-    console.log(props);
     const [subOpened, setSubOpened] = useState(false);
     const {type, categories} = props;
 
@@ -17,7 +16,6 @@ const MenuLink = (props) => {
             <HeaderContainer>
                 <MenuHeader onClick={() => {
                     setSubOpened(!subOpened);
-                    console.log(subOpened);
                 }}>{type}</MenuHeader>
                 <MenuIcon src={icon} transform={subOpened && "rotate(180deg)"}/>
             </HeaderContainer>
