@@ -12,7 +12,7 @@ const Home = () => {
     const {allProducts, getAllProducts} = useContext(MakeupContext);
     const {getProfile, profile} = useProfileContext();
     const {loggedIn, getSession, currentUser} = useAuthContext();
-
+    console.log(profile);
     useEffect(() => {
         getSession()
             .then(response => {
@@ -21,11 +21,12 @@ const Home = () => {
                 }
                 if (response.result) {
                     getProfile(response.result.id);
+                    if(profile.active === false){
+                        console.log("this profile is not active");
+                        navigate('/profile/setup');
+                    }
                 }
-                if(!profile.active){
-                    console.log("this profile is not active");
-                    navigate('/profile/setup');
-                }
+
             })
             .catch(err => {
                 console.log(err);

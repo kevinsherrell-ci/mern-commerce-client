@@ -66,7 +66,7 @@ export const AuthProvider = ({children}) => {
             setErrors(errors);
         }
     }
-    const logout = () => {
+    const logout = (callback) => {
         console.log(URL);
         console.log("logout");
         const options = {
@@ -83,6 +83,10 @@ export const AuthProvider = ({children}) => {
             .catch(errors => {
                 setErrors(errors);
             })
+        if (typeof callback === "function") {
+            callback();
+        }
+        return;
     }
     return (
         <AuthContext.Provider value={{

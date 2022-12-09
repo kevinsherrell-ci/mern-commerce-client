@@ -1,4 +1,5 @@
 import {createContext, useContext, useState} from 'react';
+import {isArgumentsObject} from "util/support/types";
 
 export const ProfileContext = createContext('');
 
@@ -7,7 +8,7 @@ export const ProfileProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
     const [profile, setProfile] = useState({});
-
+    const [message, setMessage] = useState();
     const createProfile = async (userId) => {
         const options = {
             method: "POST",
@@ -24,7 +25,7 @@ export const ProfileProvider = ({children}) => {
             .then(response => console.log(response));
 
     }
-    const getProfile = async (userId) =>{
+    const getProfile = async (userId) => {
         console.log("fetching profile");
         const options = {
             method: "GET",
@@ -32,10 +33,30 @@ export const ProfileProvider = ({children}) => {
         }
         const _profile = await fetch(`${URL}/profiles/${userId}`);
         const data = await _profile.json();
-        if(data.success){
+        if (data.success) {
             setProfile(data.result);
         }
 
+    }
+    const updateProfile = async (profileId, updateObj) => {
+        const options = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: 'include',
+            body: JSON.stringify(updateObj)
+        }
+        const request = await fetch(`${URL}/profiles/update/${profileId}`, options);
+        const response = await request.json();
+        console.log("Update Profile", response);
+        if (response.message) {
+            setMessage(response.message);
+        }
+        return response;
+    }
+    const clearProfile = () => {
+        setProfile({});
     }
     const addToCart = (data) => {
         console.log("adding to cart");
@@ -83,7 +104,9 @@ export const ProfileProvider = ({children}) => {
             updateQty: updateQty,
             createProfile: createProfile,
             getProfile: getProfile,
-            profile: profile
+            profile: profile,
+            updateProfile: updateProfile,
+            clearProfile: clearProfile
         }}>
             {children}
         </ProfileContext.Provider>

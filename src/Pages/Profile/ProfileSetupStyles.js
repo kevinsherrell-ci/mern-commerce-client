@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 
 export const LoginContainer = styled.div`
   //padding: 0 25%
+  position: relative;
   width: 50%;
   margin: 0 auto;
 `
@@ -81,4 +82,16 @@ export const StateInput = styled.select`
 `
 export const StateOption = styled.option`
     
+`
+export const SuccessMessage = styled.p`
+position: absolute;
+  //left: 25%;
+  top: 25%;
+  width: 100%;
+  //height: 50%;
+  background-color: pink;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 5px;
 `

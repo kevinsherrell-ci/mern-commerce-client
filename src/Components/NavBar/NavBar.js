@@ -17,7 +17,7 @@ import {useAuthContext} from "../../Hooks/Auth";
 
 
 const NavBar = () => {
-    const {cart, total, getProfile, profile} = useProfileContext();
+    const {cart, total, getProfile, profile, clearProfile} = useProfileContext();
     const {loggedIn, currentUser, logout} = useAuthContext();
     const [cartOpened, setCartOpened] = useState(false);
 
@@ -43,7 +43,7 @@ const NavBar = () => {
             <InnerContainer>
                 <AccountSection>
                     {displayGreeting()}
-                    {loggedIn && <LogOut onClick={()=>logout()}>Logout</LogOut>}
+                    {loggedIn && <LogOut onClick={()=>logout(()=>clearProfile())}>Logout</LogOut>}
                 </AccountSection>
                 <NavContainer>
                     <HomeLink to={'/'}>MERN<HomeLinkRight>commerce</HomeLinkRight> </HomeLink>

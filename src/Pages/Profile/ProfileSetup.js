@@ -6,17 +6,20 @@ import {
     LoginContainer,
     Submit,
     GuestLink,
-    GuestText, FormHeader, StateInput, StateOption, ProfileText
+    GuestText, FormHeader, StateInput, StateOption, ProfileText, SuccessMessage
 } from "./ProfileSetupStyles";
 import {useState} from "react";
 import {useAuthContext} from "../../Hooks/Auth";
 import {useProfileContext} from "../../Hooks/Profile";
-import {redirect} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 
 const states = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
 
 const ProfileSetup = () => {
+    const navigate = useNavigate();
+    const {profile, updateProfile, message} = useProfileContext();
+    const {_id} = profile;
     const [firstName, setFirstName] = useState("")
     const [middle, setMiddle] = useState("")
     const [lastName, setLastName] = useState("")
@@ -25,18 +28,31 @@ const ProfileSetup = () => {
     const [state, setState] = useState("")
     const [city, setCity] = useState("")
     const [zip, setZip] = useState("")
-
+    const [success, setSuccess] = useState(false);
+    console.log(_id);
     const profileObject = {
         firstName: firstName,
-        middle: middle,
+        middleName: middle,
         lastName: lastName,
-        address: address,
-        address2: address2,
-        state: state === "State" ? "" : state,
-        city: city,
-        zip: zip
+        shippingAddress: {
+            address: address,
+            address2: address2,
+            state: state === "State" ? "" : state,
+            city: city,
+            zip: zip
+        },
+        active: true
     }
-    console.log(profileObject);
+    const displaySuccess =()=>{
+
+            return <SuccessMessage>Thank you for providing us with this information. Redirecting...</SuccessMessage>
+
+    }
+    const backToHome = ()=>{
+        setTimeout(()=>{
+            navigate('/');
+        }, 2000)
+    }
     const mapStates = states.map((state, index) => {
         return <StateOption value={state} key={state + index}>{state}</StateOption>
     })
@@ -68,10 +84,16 @@ const ProfileSetup = () => {
             </FormRow>
             <FormRow direction={"column"}>
 
-                <Submit>Submit</Submit>
+                <Submit onClick={async () => {
+                    const update = await updateProfile(_id, profileObject);
+                    if(update.result){
+                        setSuccess(true);
+                    }
+                }}>Submit</Submit>
 
             </FormRow>
-
+            {success && displaySuccess()}
+            {success && backToHome()}
         </LoginContainer>
     )
 }
