@@ -17,17 +17,14 @@ import {useAuthContext} from "../../Hooks/Auth";
 
 
 const NavBar = () => {
-    console.log("NAVBAR");
     const {cart, total, getProfile, profile} = useProfileContext();
     const {loggedIn, currentUser, logout} = useAuthContext();
-    console.log(currentUser);
     const [cartOpened, setCartOpened] = useState(false);
 
     const mapCart = cart.map(item => {
         return (item.qty > 0) && <CartProductCard {...item} key={item.id}/>
     })
     useEffect(() => {
-        console.log(currentUser)
     }, [cart, loggedIn, currentUser])
     const displayGreeting = ()=>{
         if(loggedIn){

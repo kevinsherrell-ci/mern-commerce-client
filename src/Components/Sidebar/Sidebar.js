@@ -3,7 +3,7 @@ import {Container, SubMenu, LinkContainer, SubMenuItem, MenuHeader} from "./Side
 
 import {useState} from "react";
 import MenuLink from "./MenuLink/MenuLink";
-
+import {uuid} from 'uuidv4';
 
 const linkFormat = [
     {"blush": ["powder", "cream"]},
@@ -19,11 +19,11 @@ const linkFormat = [
 ]
 
 const Sidebar = ({width}) => {
-    console.log("SIDEBAR");
-    const mapLinks = linkFormat.map(productType=>{
+    const mapLinks = linkFormat.map((productType, index)=>{
         const type = Object.keys(productType)[0];
         const categories = Object.values(productType);
-        return <MenuLink type={type} categories={categories[0]}/>
+
+        return <MenuLink type={type} categories={categories[0]} key={type + index}/>
     })
     return (
         <Container width={width}>

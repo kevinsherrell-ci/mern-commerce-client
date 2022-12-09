@@ -6,9 +6,8 @@ const MenuLink = (props) => {
     const [subOpened, setSubOpened] = useState(false);
     const {type, categories} = props;
 
-    const mapCategories = categories.map(category => {
-        return <SubMenuItem height={subOpened && "300px"} visibility={subOpened && 'visible'}
-                            to={`product/${type}?product_type=${type}&product_category=${category}`}>{category}</SubMenuItem>
+    const mapCategories = categories.map((category, index) => {
+        return <SubMenuItem height={subOpened && "300px"} visibility={subOpened && 'visible'} to={`product/${type}?product_type=${type}&product_category=${category}`} key={category + index}>{category}</SubMenuItem>
     })
 
     return (

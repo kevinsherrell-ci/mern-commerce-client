@@ -9,17 +9,27 @@ import {useNavigate} from 'react-router-dom';
 
 const Home = () => {
     const navigate = useNavigate();
-    // const key = uuid();
-    console.log("HOME");
     const {allProducts, getAllProducts} = useContext(MakeupContext);
-    const profile = useProfileContext();
-    const {getProfile} = profile;
-    const auth = useAuthContext();
-    const {loggedIn, getSession} = auth;
-
+    const {getProfile, profile} = useProfileContext();
+    const {loggedIn, getSession, currentUser} = useAuthContext();
 
     useEffect(() => {
-        getSession();
+        getSession()
+            .then(response => {
+                if(response === null || response === undefined){
+                    return;
+                }
+                if (response.result) {
+                    getProfile(response.result.id);
+                }
+                if(!profile.active){
+                    console.log("this profile is not active");
+                    navigate('/profile/setup');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }, [])
 
     const mapProducts = allProducts.map(product => {

@@ -14,22 +14,18 @@ import {useProfileContext} from "../../Hooks/Profile";
 import {redirect} from "react-router-dom";
 
 const Register = () => {
-    const Auth = useAuthContext();
-    const profile = useProfileContext();
-    const {register, login} = Auth;
-    const {createProfile} = profile;
+    const {register, login} = useAuthContext();
+    const {createProfile} = useProfileContext();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
-    console.log(email);
-    console.log(password);
-    console.log(verify);
+
     const registerObject = {
         email: email,
         password: password,
         verify: verify
     }
-    console.log(registerObject);
     return (
 
         <LoginContainer>
@@ -63,14 +59,7 @@ const Register = () => {
                 </LoginText>
 
             </FormRow>
-            {/*<FormRow>*/}
-            {/*    <GuestText>*/}
-            {/*        Just browsing?*/}
-            {/*    </GuestText>*/}
-            {/*    <GuestLink to={'/'}>*/}
-            {/*        Continue as Guest*/}
-            {/*    </GuestLink>*/}
-            {/*</FormRow>*/}
+
         </LoginContainer>
     )
 }

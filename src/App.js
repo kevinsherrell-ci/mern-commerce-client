@@ -8,6 +8,8 @@ import AuthLayout from "./Layouts/AuthLayout";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import {useAuthContext} from "./Hooks/Auth";
+import ProfileSetupLayout from "./Layouts/ProfileSetupLayout";
+import ProfileSetup from "./Pages/Profile/ProfileSetup";
 
 function App() {
     const Auth = useAuthContext();
@@ -44,6 +46,13 @@ function App() {
                     path: '/auth/register',
                     element: <Register/>
                 }]
+        }, {
+            path: '/profile',
+            element: <ProfileSetupLayout/>,
+            children: [{
+                path: '/profile/setup',
+                element: <ProfileSetup/>
+            }]
         }
     ])
     return (

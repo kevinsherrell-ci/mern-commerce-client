@@ -7,7 +7,6 @@ export const ProfileProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
     const [profile, setProfile] = useState({});
-    console.log(cart)
 
     const createProfile = async (userId) => {
         const options = {
@@ -26,10 +25,17 @@ export const ProfileProvider = ({children}) => {
 
     }
     const getProfile = async (userId) =>{
-        const _profile = await fetch(`${URL}/profiles/${userId}`);
-        if(_profile.success){
-            setProfile(_profile.result);
+        console.log("fetching profile");
+        const options = {
+            method: "GET",
+            credentials: "include"
         }
+        const _profile = await fetch(`${URL}/profiles/${userId}`);
+        const data = await _profile.json();
+        if(data.success){
+            setProfile(data.result);
+        }
+
     }
     const addToCart = (data) => {
         console.log("adding to cart");
@@ -76,7 +82,8 @@ export const ProfileProvider = ({children}) => {
             getCartTotal: getCartTotal,
             updateQty: updateQty,
             createProfile: createProfile,
-            getProfile: getProfile
+            getProfile: getProfile,
+            profile: profile
         }}>
             {children}
         </ProfileContext.Provider>

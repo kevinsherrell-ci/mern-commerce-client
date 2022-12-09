@@ -5,12 +5,13 @@ import {redirect, useNavigate} from "react-router-dom";
 export const AuthContext = createContext('');
 
 const URL = process.env.REACT_APP_ENDPOINT;
-console.log(URL);
 export const AuthProvider = ({children}) => {
+    const [sessionFound, setSessionFound] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
     const [errors, setErrors] = useState();
     const getSession = async () => {
+        console.log("retrieving session...")
         const options = {
             method: "POST",
             credentials: "include"
@@ -18,12 +19,12 @@ export const AuthProvider = ({children}) => {
         const reconnect = await fetch(`${URL}/users/reconnect`, options);
         const result = await reconnect.json();
         if (Object.keys(result).includes("result")) {
+            setSessionFound(true);
             setLoggedIn(true);
             setCurrentUser(result.result);
-            console.log("there is a current user");
-            return result.result;
+            console.log(result.result);
         }
-
+        return result
     }
 
     const register = async (obj) => {
