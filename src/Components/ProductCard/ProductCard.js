@@ -8,18 +8,22 @@ import {
 } from "./ProductCardStyles";
 
 import {useProfileContext} from '../../Hooks/Profile';
+import {useAuthContext} from "../../Hooks/Auth";
 
 const ProductCard = (props) => {
     // console.log("PRODUCT CARD");
-    const {cart, addToCart} = useProfileContext();
-    const {id, api_featured_image, brand, description, image_link, name, price, rating} = props;
+    const {authenticated} = useAuthContext();
+    const {cart, updateProfile, _id} = useProfileContext();
+    const {id, api_featured_image, brand, description, image_link, name, price, rating, product} = props;
     const cartObject = {
-        id: id,
-        api_featured_image: api_featured_image,
-        brand: brand,
-        name: name,
-        price: price,
+        ...product,
         qty: 1
+    }
+    const addToCart = () => {
+        if (authenticated) {
+            console.log(_id);
+            updateProfile(_id, {cart: [ ...cart, cartObject]});
+        }
     }
     return (
         <ProductCardContainer>
@@ -32,7 +36,7 @@ const ProductCard = (props) => {
             </InfoSection>
             <PriceSection>
                 <Price>${price}</Price>
-                <AddToCard onClick={() => addToCart(cartObject)}>Add to Cart</AddToCard>
+                <AddToCard onClick={() => addToCart()}>Add to Cart</AddToCard>
             </PriceSection>
         </ProductCardContainer>
     )

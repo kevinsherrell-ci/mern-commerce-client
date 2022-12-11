@@ -12,25 +12,29 @@ const Home = () => {
     console.log('Home')
     const navigate = useNavigate();
     const {allProducts, getAllProducts} = useContext(MakeupContext);
-    const {getProfile, profile} = useProfileContext();
+    const {getProfile, _id, user_id, active} = useProfileContext();
     const {user, getSession, authenticated} = useAuthContext();
 
 
     useEffect(() => {
         if (!authenticated) {
+
             getSession().then(response => {
                 if (response.id) {
                     getProfile(response.id)
                 }
             })
         }
-        if (authenticated && profile.active === false) navigate('/profile/setup');
+        {(authenticated && active === false) && navigate('/profile/setup')}
 
 
-    }, [profile])
+
+    }, [])
 
 
     const mapProducts = allProducts.map(product => {
+        // const stringProduct = JSON.stringify(product);
+        // console.log(product);
         return <ProductCard {...product} />
     })
 

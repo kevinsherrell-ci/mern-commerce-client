@@ -19,7 +19,7 @@ const Product = () => {
 
     }, [query]);
     const mapData = data.map(product => {
-        return <ProductCard {...product} key={product.id}/>
+        return <ProductCard {...product} product={{...product}} key={product.id}/>
     })
     return (
         <ProductPageContainer>

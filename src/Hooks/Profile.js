@@ -7,7 +7,16 @@ const {CREATE_PROFILE, GET_PROFILE, UPDATE_PROFILE, CLEAR_PROFILE, PROFILE_ERROR
 const URL = process.env.REACT_APP_ENDPOINT;
 export const ProfileProvider = ({children}) => {
     const [state, dispatch] = useReducer(profileReducer, {
-        profile: {},
+        _id: "",
+        user_id: "",
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        shippingAddress: {},
+        billingAddress: {},
+        cart: [],
+        favorites: [],
+        active: false,
         message: []
     });
     const [cart, setCart] = useState([]);
@@ -48,22 +57,22 @@ export const ProfileProvider = ({children}) => {
             credentials: "include"
         }
 
-        const profileReq =  await fetch(`${URL}/profiles/${userId}`, options);
-       const profileRes = await profileReq.json();
+        const profileReq = await fetch(`${URL}/profiles/${userId}`, options);
+        const profileRes = await profileReq.json();
 
 
-                if(profileRes.error){
-                     dispatch({
-                        type: PROFILE_ERROR,
-                        payload: profileRes.error
-                    })
-                    return profileRes.error
-                }
-                 dispatch({
-                    type: GET_PROFILE,
-                    payload: profileRes.data
-                })
-                return profileRes.data
+        if (profileRes.error) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: profileRes.error
+            })
+            return profileRes.error
+        }
+        dispatch({
+            type: GET_PROFILE,
+            payload: profileRes.data
+        })
+        return profileRes.data
 
 
     }
@@ -77,16 +86,16 @@ export const ProfileProvider = ({children}) => {
             body: JSON.stringify(updateObj)
         }
         fetch(`${URL}/profiles/update/${profileId}`, options)
-            .then(response=>response.json())
-            .then(response=>{
-                if(response.error){
+            .then(response => response.json())
+            .then(response => {
+                if (response.error) {
                     dispatch({
                         type: PROFILE_ERROR,
                         payload: response.error
                     })
                     return false;
                 }
-                 dispatch({
+                dispatch({
                     type: UPDATE_PROFILE,
                     payload: response.data
                 })
@@ -139,15 +148,13 @@ export const ProfileProvider = ({children}) => {
 
     return (
         <ProfileContext.Provider value={{
-            cart: cart,
-            total: total,
+            ...state,
             removeItem: removeItem,
             addToCart: addToCart,
             getCartTotal: getCartTotal,
             updateQty: updateQty,
             createProfile: createProfile,
             getProfile: getProfile,
-            profile: state.profile,
             updateProfile: updateProfile,
             clearProfile: clearProfile
         }}>

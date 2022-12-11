@@ -13,18 +13,16 @@ export const profileReducer = (state, action) => {
     switch (action.type) {
         case "create_profile":
             console.log(action.payload);
-            return {profile: action.payload}
+            return action.payload
         case "get_profile":
-            return {profile: action.payload}
+            return action.payload
         case "update_profile":
             return {
-                // ...state,
-                profile: action.payload
+                ...state,
+                ...action.payload
             }
         case "clear_profile":
-            return {
-                profile: {}
-            }
+            return {}
         case "profile_error":
             return {
                 message: action.payload
