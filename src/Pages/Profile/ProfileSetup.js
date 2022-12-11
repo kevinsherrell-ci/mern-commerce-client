@@ -8,7 +8,7 @@ import {
     GuestLink,
     GuestText, FormHeader, StateInput, StateOption, ProfileText, SuccessMessage
 } from "./ProfileSetupStyles";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useAuthContext} from "../../Hooks/Auth";
 import {useProfileContext} from "../../Hooks/Profile";
 import {redirect, useNavigate} from "react-router-dom";
@@ -29,7 +29,7 @@ const ProfileSetup = () => {
     const [city, setCity] = useState("")
     const [zip, setZip] = useState("")
     const [success, setSuccess] = useState(false);
-    console.log(_id);
+    console.log(profile);
     const profileObject = {
         firstName: firstName,
         middleName: middle,
@@ -40,9 +40,12 @@ const ProfileSetup = () => {
             state: state === "State" ? "" : state,
             city: city,
             zip: zip
-        },
+          },
         active: true
     }
+    useEffect(()=>{
+        console.log(profile);
+    })
     const displaySuccess =()=>{
 
             return <SuccessMessage>Thank you for providing us with this information. Redirecting...</SuccessMessage>
@@ -84,9 +87,12 @@ const ProfileSetup = () => {
             </FormRow>
             <FormRow direction={"column"}>
 
-                <Submit onClick={async () => {
-                    const update = await updateProfile(_id, profileObject);
-                   console.log(update);
+                <Submit onClick={  () => {
+                  const updated = updateProfile(_id, profileObject);
+                  if(updated){
+                      setSuccess(true);
+                  }
+
                 }}>Submit</Submit>
 
             </FormRow>

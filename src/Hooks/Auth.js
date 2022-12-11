@@ -19,30 +19,28 @@ export const AuthProvider = ({children}) => {
     // const [loggedIn, setLoggedIn] = useState(false);
     // const [currentUser, setCurrentUser] = useState({});
     // const [errors, setErrors] = useState();
-    const getSession = () => {
+    const getSession = async () => {
         console.log("retrieving session...");
         const options = {
             method: "POST",
             credentials: "include"
         }
 
-        fetch(`${URL}/users/reconnect`, options)
-            .then(response => response.json())
-            .then(response => {
-                if (response.data) {
-                    return dispatch({
-                        type: GET_SESSION,
-                        payload: response.data
-                    });
-                }
-                if (response.error) {
-                    return dispatch({
-                        type: AUTH_ERROR,
-                        payload: response.error
-                    })
-                }
+        const sessionReq = await fetch(`${URL}/users/reconnect`, options);
+        const sessionRes = await sessionReq.json();
+
+        if (sessionRes.error) {
+            dispatch({
+                type: AUTH_ERROR,
+                payload: sessionRes.error
             })
-            .catch(err => console.log(err))
+            return sessionRes.error;
+        }
+        dispatch({
+            type: GET_SESSION,
+            payload: sessionRes.data
+        })
+        return sessionRes.data;
 
 
     }

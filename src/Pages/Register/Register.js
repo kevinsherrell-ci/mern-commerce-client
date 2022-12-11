@@ -21,11 +21,17 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
-    console.log(user);
+    console.log(email, password);
     const registerObject = {
         email: email,
         password: password,
         verify: verify
+    }
+    const loginObject = {
+        email: email,
+        password: password
+
+
     }
 
 
@@ -51,9 +57,9 @@ const Register = () => {
                             .then(response => {
                                 createProfile(response._id);
                             })
-                            .catch(err => console.log(err))
-                        login({email, password});
-                        navigate('/');
+                            .then(() => login(loginObject))
+                            .then(() => navigate('/'))
+
                     } catch (err) {
                         console.log(err);
                     }

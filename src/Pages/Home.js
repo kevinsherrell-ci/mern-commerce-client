@@ -14,33 +14,33 @@ const Home = () => {
     const {allProducts, getAllProducts} = useContext(MakeupContext);
     const {getProfile, profile} = useProfileContext();
     const {user, getSession, authenticated} = useAuthContext();
-    const {_profile, _setProfile} = useState({...profile});
-    if (user && Object.keys(user).length === 0) getSession();
-    // if(user && Object.keys(user).length > 0) getProfile(user.id);
-    console.log(user);
-    // if (Object.keys(user).length > 0 && user.id) {
-    //     getProfile(user.id);
-    // }
+
+
     useEffect(() => {
+        if (!authenticated) {
+            getSession().then(response => {
+                if (response.id) {
+                    getProfile(response.id)
+                }
+            })
+        }
+        if (authenticated && profile.active === false) navigate('/profile/setup');
 
-        // if(profile.active){
-        //     console.log("active");
-        // }
-        // if(!profile.active){
-        //     console.log("not active");
-        //     navigate('/profile/setup');
-        // }
 
-    }, [])
+    }, [profile])
 
 
     const mapProducts = allProducts.map(product => {
         return <ProductCard {...product} />
     })
+
+
     return (
         <div>
             {mapProducts}
         </div>
     )
+
+
 }
 export default Home;

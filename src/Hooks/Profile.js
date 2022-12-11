@@ -12,8 +12,7 @@ export const ProfileProvider = ({children}) => {
     });
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
-    const [profile, setProfile] = useState({});
-    const [message, setMessage] = useState();
+
     const createProfile = (userId) => {
         const options = {
             method: "POST",
@@ -42,27 +41,30 @@ export const ProfileProvider = ({children}) => {
             .catch(err => console.log(err))
 
     }
-    const getProfile = (userId) => {
+    const getProfile = async (userId) => {
         console.log("fetching profile");
         const options = {
             method: "GET",
             credentials: "include"
         }
-        fetch(`${URL}/profiles/${userId}`, options)
-            .then(response => response.json())
-            .then(response => {
-                if(response.error){
-                    return dispatch({
+
+        const profileReq =  await fetch(`${URL}/profiles/${userId}`, options);
+       const profileRes = await profileReq.json();
+
+
+                if(profileRes.error){
+                     dispatch({
                         type: PROFILE_ERROR,
-                        payload: response.error
+                        payload: profileRes.error
                     })
+                    return profileRes.error
                 }
-                return dispatch({
+                 dispatch({
                     type: GET_PROFILE,
-                    payload: response.data
+                    payload: profileRes.data
                 })
-            })
-            .catch(err=>console.log(err))
+                return profileRes.data
+
 
     }
     const updateProfile = async (profileId, updateObj) => {
@@ -145,7 +147,7 @@ export const ProfileProvider = ({children}) => {
             updateQty: updateQty,
             createProfile: createProfile,
             getProfile: getProfile,
-            profile: profile,
+            profile: state.profile,
             updateProfile: updateProfile,
             clearProfile: clearProfile
         }}>

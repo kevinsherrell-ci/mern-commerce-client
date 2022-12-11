@@ -18,7 +18,7 @@ export const profileReducer = (state, action) => {
             return {profile: action.payload}
         case "update_profile":
             return {
-                ...state,
+                // ...state,
                 profile: action.payload
             }
         case "clear_profile":

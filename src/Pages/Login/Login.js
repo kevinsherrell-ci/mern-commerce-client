@@ -10,19 +10,22 @@ import {useEffect, useState} from "react";
 import {FormHeader} from "../../Layouts/AuthLayoutStyles";
 import {useAuthContext} from "../../Hooks/Auth";
 import {useNavigate} from "react-router-dom";
+import {useProfileContext} from "../../Hooks/Profile";
 
 const Login = () => {
     const navigate = useNavigate();
-    const {authenticated, login} = useAuthContext();
+    const {user, authenticated, login} = useAuthContext();
+    const {getProfile, profile} = useProfileContext();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-
+                  console.log(user);
     const loginObject = {
         email: email,
         password: password
     }
 useEffect(()=>{
     if(authenticated){
+        getProfile(user.id);
         navigate('/');
     }
 }, [authenticated])
