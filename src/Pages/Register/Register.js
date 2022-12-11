@@ -11,23 +11,25 @@ import {
 import {useState} from "react";
 import {useAuthContext} from "../../Hooks/Auth";
 import {useProfileContext} from "../../Hooks/Profile";
-import {redirect} from "react-router-dom";
+import {redirect, useNavigate} from "react-router-dom";
 
 const Register = () => {
-    const {register, login} = useAuthContext();
+    const navigate = useNavigate();
+    const {user, register, login} = useAuthContext();
     const {createProfile} = useProfileContext();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [verify, setVerify] = useState("");
-
+    console.log(user);
     const registerObject = {
         email: email,
         password: password,
         verify: verify
     }
-    return (
 
+
+    return (
         <LoginContainer>
             <FormRow>
                 <FormHeader>Create Account</FormHeader>
@@ -45,10 +47,13 @@ const Register = () => {
 
                 <Submit onClick={async () => {
                     try {
-                        const registerUser = await register(registerObject);
-                        createProfile(registerUser.result.insertedId);
+                        register(registerObject)
+                            .then(response => {
+                                createProfile(response._id);
+                            })
+                            .catch(err => console.log(err))
                         login({email, password});
-
+                        navigate('/');
                     } catch (err) {
                         console.log(err);
                     }

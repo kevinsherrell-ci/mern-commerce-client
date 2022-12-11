@@ -1,15 +1,20 @@
-import {createContext, useContext, useState} from 'react';
-import {isArgumentsObject} from "util/support/types";
+import {createContext, useContext, useReducer, useState} from 'react';
+import {ACTIONS, profileReducer} from "../REDUCERS/profileReducer";
+
 
 export const ProfileContext = createContext('');
-
+const {CREATE_PROFILE, GET_PROFILE, UPDATE_PROFILE, CLEAR_PROFILE, PROFILE_ERROR} = ACTIONS;
 const URL = process.env.REACT_APP_ENDPOINT;
 export const ProfileProvider = ({children}) => {
+    const [state, dispatch] = useReducer(profileReducer, {
+        profile: {},
+        message: []
+    });
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
     const [profile, setProfile] = useState({});
     const [message, setMessage] = useState();
-    const createProfile = async (userId) => {
+    const createProfile = (userId) => {
         const options = {
             method: "POST",
             headers: {
@@ -22,20 +27,42 @@ export const ProfileProvider = ({children}) => {
         }
         fetch(`${URL}/profiles/create`, options)
             .then(response => response.json())
-            .then(response => console.log(response));
+            .then(response => {
+                if (response.error) {
+                    return dispatch({
+                        type: PROFILE_ERROR,
+                        payload: response.error
+                    })
+                }
+                return dispatch({
+                    type: CREATE_PROFILE,
+                    payload: response.data
+                })
+            })
+            .catch(err => console.log(err))
 
     }
-    const getProfile = async (userId) => {
+    const getProfile = (userId) => {
         console.log("fetching profile");
         const options = {
             method: "GET",
             credentials: "include"
         }
-        const _profile = await fetch(`${URL}/profiles/${userId}`);
-        const data = await _profile.json();
-        if (data.success) {
-            setProfile(data.result);
-        }
+        fetch(`${URL}/profiles/${userId}`, options)
+            .then(response => response.json())
+            .then(response => {
+                if(response.error){
+                    return dispatch({
+                        type: PROFILE_ERROR,
+                        payload: response.error
+                    })
+                }
+                return dispatch({
+                    type: GET_PROFILE,
+                    payload: response.data
+                })
+            })
+            .catch(err=>console.log(err))
 
     }
     const updateProfile = async (profileId, updateObj) => {
@@ -47,16 +74,30 @@ export const ProfileProvider = ({children}) => {
             credentials: 'include',
             body: JSON.stringify(updateObj)
         }
-        const request = await fetch(`${URL}/profiles/update/${profileId}`, options);
-        const response = await request.json();
-        console.log("Update Profile", response);
-        if (response.message) {
-            setMessage(response.message);
-        }
-        return response;
+        fetch(`${URL}/profiles/update/${profileId}`, options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.error){
+                    dispatch({
+                        type: PROFILE_ERROR,
+                        payload: response.error
+                    })
+                    return false;
+                }
+                 dispatch({
+                    type: UPDATE_PROFILE,
+                    payload: response.data
+                })
+                return true;
+            })
+
+
     }
     const clearProfile = () => {
-        setProfile({});
+        dispatch({
+            type: CLEAR_PROFILE,
+            payload: {}
+        })
     }
     const addToCart = (data) => {
         console.log("adding to cart");

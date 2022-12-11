@@ -18,23 +18,24 @@ import {useAuthContext} from "../../Hooks/Auth";
 
 const NavBar = () => {
     const {cart, total, getProfile, profile, clearProfile} = useProfileContext();
-    const {loggedIn, currentUser, logout} = useAuthContext();
+    const {loggedIn, user, authenticated, logout} = useAuthContext();
     const [cartOpened, setCartOpened] = useState(false);
 
     const mapCart = cart.map(item => {
         return (item.qty > 0) && <CartProductCard {...item} key={item.id}/>
     })
     useEffect(() => {
-    }, [cart, loggedIn, currentUser])
-    const displayGreeting = ()=>{
-        if(loggedIn){
+    }, [cart, loggedIn, user])
+    const displayGreeting = () => {
+        if (authenticated) {
             return (
-                <Greeting>Hi! {currentUser && currentUser.email}
+                <Greeting>Hi! {user && user.email}
                 </Greeting>
             )
         }
         return (
-            <Greeting>Hi!<SignInLink to={'/auth/login'}>Sign In</SignInLink> / <RegisterLink to={'/auth/register'}>Register</RegisterLink>
+            <Greeting>Hi!<SignInLink to={'/auth/login'}>Sign In</SignInLink> / <RegisterLink
+                to={'/auth/register'}>Register</RegisterLink>
             </Greeting>
         )
     }
@@ -43,7 +44,10 @@ const NavBar = () => {
             <InnerContainer>
                 <AccountSection>
                     {displayGreeting()}
-                    {loggedIn && <LogOut onClick={()=>logout(()=>clearProfile())}>Logout</LogOut>}
+                    {authenticated && <LogOut onClick={() => {
+                        logout();
+                        clearProfile();
+                    }}>Logout</LogOut>}
                 </AccountSection>
                 <NavContainer>
                     <HomeLink to={'/'}>MERN<HomeLinkRight>commerce</HomeLinkRight> </HomeLink>

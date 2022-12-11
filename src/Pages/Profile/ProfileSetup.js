@@ -86,9 +86,7 @@ const ProfileSetup = () => {
 
                 <Submit onClick={async () => {
                     const update = await updateProfile(_id, profileObject);
-                    if(update.result){
-                        setSuccess(true);
-                    }
+                   console.log(update);
                 }}>Submit</Submit>
 
             </FormRow>

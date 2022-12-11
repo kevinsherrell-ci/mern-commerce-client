@@ -1,5 +1,5 @@
 import {Outlet, redirect} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import {MakeupContext} from "../Hooks/MakeupAPI";
 import ProductCard from "../Components/ProductCard/ProductCard";
 import {useProfileContext} from "../Hooks/Profile";
@@ -7,31 +7,32 @@ import {useAuthContext} from "../Hooks/Auth";
 // import {uuid} from "uuidv4";
 import {useNavigate} from 'react-router-dom';
 
+
 const Home = () => {
+    console.log('Home')
     const navigate = useNavigate();
     const {allProducts, getAllProducts} = useContext(MakeupContext);
     const {getProfile, profile} = useProfileContext();
-    const {loggedIn, getSession, currentUser} = useAuthContext();
-    console.log(profile);
+    const {user, getSession, authenticated} = useAuthContext();
+    const {_profile, _setProfile} = useState({...profile});
+    if (user && Object.keys(user).length === 0) getSession();
+    // if(user && Object.keys(user).length > 0) getProfile(user.id);
+    console.log(user);
+    // if (Object.keys(user).length > 0 && user.id) {
+    //     getProfile(user.id);
+    // }
     useEffect(() => {
-        getSession()
-            .then(response => {
-                if(response === null || response === undefined){
-                    return;
-                }
-                if (response.result) {
-                    getProfile(response.result.id);
-                    if(profile.active === false){
-                        console.log("this profile is not active");
-                        navigate('/profile/setup');
-                    }
-                }
 
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        // if(profile.active){
+        //     console.log("active");
+        // }
+        // if(!profile.active){
+        //     console.log("not active");
+        //     navigate('/profile/setup');
+        // }
+
     }, [])
+
 
     const mapProducts = allProducts.map(product => {
         return <ProductCard {...product} />

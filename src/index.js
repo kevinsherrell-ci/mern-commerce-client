@@ -8,7 +8,7 @@ import {AuthProvider} from "./Hooks/Auth";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <>
+    <React.StrictMode>
         <AuthProvider>
             <ProfileProvider>
                 <MakeupProvider>
@@ -18,7 +18,7 @@ root.render(
         </AuthProvider>
 
 
-    </>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

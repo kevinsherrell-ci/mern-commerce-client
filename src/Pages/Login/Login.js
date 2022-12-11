@@ -6,14 +6,14 @@ import {
     LoginContainer,
     Submit
 } from "./LoginStyles";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {FormHeader} from "../../Layouts/AuthLayoutStyles";
 import {useAuthContext} from "../../Hooks/Auth";
 import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
-    const {login} = useAuthContext();
+    const {authenticated, login} = useAuthContext();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -21,7 +21,11 @@ const Login = () => {
         email: email,
         password: password
     }
-
+useEffect(()=>{
+    if(authenticated){
+        navigate('/');
+    }
+}, [authenticated])
     return (
 
         <LoginContainer>
@@ -37,10 +41,10 @@ const Login = () => {
             <FormRow direction={"column"}>
 
                 <Submit onClick={async () => {
-                    const loginUser = await login(loginObject);
-                    if (loginUser) {
-                        navigate('/');
-                    }
+                    login(loginObject);
+                    // if (authenticated) {
+                    //     navigate('/');
+                    // }
 
                 }}>Login</Submit>
                 <CreateAccountText>
