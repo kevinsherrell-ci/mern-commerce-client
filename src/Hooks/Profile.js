@@ -104,6 +104,34 @@ export const ProfileProvider = ({children}) => {
 
 
     }
+    const removeItem = async (profileId, cartObject)=>{
+        const options = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: 'include',
+            body: JSON.stringify(cartObject)
+        }
+        fetch(`${URL}/profiles/update/${profileId}/cart/remove`, options)
+            .then(response => response.json())
+            .then(response => {
+                if (response.error) {
+                    dispatch({
+                        type: PROFILE_ERROR,
+                        payload: response.error
+                    })
+                    return false;
+                }
+                dispatch({
+                    type: UPDATE_PROFILE,
+                    payload: response.data
+                })
+                return true;
+            })
+
+
+    }
     const clearProfile = () => {
         dispatch({
             type: CLEAR_PROFILE,
@@ -138,21 +166,15 @@ export const ProfileProvider = ({children}) => {
         getCartTotal();
 
     }
-    const removeItem = (id) => {
-        console.log("removing item from cart");
-        console.log(cart);
-        const cartTemp = [...cart];
-        const filtered = cartTemp.filter(item => item.id !== id);
-        setCart(filtered);
-    }
+
 
     return (
         <ProfileContext.Provider value={{
             ...state,
-            removeItem: removeItem,
             addToCart: addToCart,
             getCartTotal: getCartTotal,
             updateQty: updateQty,
+            removeItem: removeItem,
             createProfile: createProfile,
             getProfile: getProfile,
             updateProfile: updateProfile,

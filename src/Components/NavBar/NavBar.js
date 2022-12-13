@@ -21,8 +21,8 @@ const NavBar = () => {
     const {loggedIn, user, authenticated, logout} = useAuthContext();
     const [cartOpened, setCartOpened] = useState(false);
 
-    const mapCart = cart.map(item => {
-        return (item.qty > 0) && <CartProductCard {...item} key={item.id}/>
+    const mapCart = cart && cart.map((item, index) => {
+        return (item.qty > 0) && <CartProductCard {...item} key={item.name + item.id + index} />
     })
     useEffect(() => {
     }, [cart, loggedIn, user])
@@ -57,11 +57,12 @@ const NavBar = () => {
                     </SearchContainer>
                     <CartWrapper>
                         <CartIcon src={CartImage} onClick={() => setCartOpened(!cartOpened)}/>
-                        {(cart !== null && cart.length > 0) && <CartCounter>{cart.length}</CartCounter>}
+                        {(cart && cart.length > 0) && <CartCounter>{cart.length}</CartCounter>}
                     </CartWrapper>
                 </NavContainer>
                 {cartOpened && (
                     <CartContainer height={"500px"}>
+
                         {mapCart}
                         <p>Total Price: ${total}</p>
                     </CartContainer>

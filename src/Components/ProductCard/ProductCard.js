@@ -22,9 +22,20 @@ const ProductCard = (props) => {
     const addToCart = () => {
         if (authenticated) {
             console.log(_id);
-            updateProfile(_id, {cart: [ ...cart, cartObject]});
+            const findItem = cart.find(item => item.id === cartObject.id);
+            console.log(findItem, cartObject);
+            if (findItem === null || findItem === undefined) {
+                console.log("item not found")
+                return updateProfile(_id, {cart: [...cart, cartObject]});
+            }else{
+                console.log('item found');
+                findItem.qty += 1;
+                return updateProfile(_id, {cart: [...findItem]});
+            }
+
         }
     }
+
     return (
         <ProductCardContainer>
             <ImageSection>

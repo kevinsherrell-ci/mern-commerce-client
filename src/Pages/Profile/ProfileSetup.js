@@ -18,8 +18,8 @@ const states = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM'
 
 const ProfileSetup = () => {
     const navigate = useNavigate();
-    const {profile, updateProfile, message} = useProfileContext();
-    const {_id} = profile;
+    const {profile, updateProfile, message, _id} = useProfileContext();
+
     const [firstName, setFirstName] = useState("")
     const [middle, setMiddle] = useState("")
     const [lastName, setLastName] = useState("")
