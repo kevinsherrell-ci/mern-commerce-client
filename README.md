@@ -1,70 +1,48 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+MERNcommerce
 
-In the project directory, you can run:
+MERNcommerce is an E-commerce application built using MERN stack (MongoDB, Express.js, Node.js, React.js)
 
-### `npm start`
+Goal
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+As an E-commerce application the goal of this project is to create a seamless experience for the user to browse products, add them to their cart, and checkout. Eventually this project will become a template for my future E-commerce stores.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Current functionality
 
-### `npm test`
+Currently, can create accounts/profiles, log in/out, browse products and add them to their cart. User accounts,  profiles, and carts are stored in the MERNcommerce MongoDB database; product data is retrieved from the makeup api (More information on the makeup API here https://makeup-api.herokuapp.com/).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Currently working on....
 
-### `npm run build`
+    A "wishlist" for users to save items that they may want to purchase in the future.
+    A checkout page allowing users to purchase products using various payment gateways.
+    Making the search field in the navigation bar functional.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Future functionality
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    An account section that allows users to update their personal information. Currently there is a profile-setup page that the user is routed to if their account is new and their profile is not yet active.
+    Email verification when an account is created.
+    Password reset
+    Admin panel that allows for customization of store without needing to edit code directly (stretch goal).
+    ...lots of other stuff.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Installation
 
-### `npm run eject`
+This application requires MongoDB, Express.js and Node.js.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Clone this repository and run npm install.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You will need to create environment variable for both the server and client
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Server variables:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+PORT - The port that your Express.js server is runing on.
 
-## Learn More
+MONGO_URI  - The MongoDB connection string.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+MONGO_DATABASE - The name of the database.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Client variables:
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+REACT_APP_ENDPOINT - The endpoint to perform API requests. Essentially, the url that your server is running on. For example, if your server is running on localhost:4100, this would be the value that you use for this variable.
+311 words
