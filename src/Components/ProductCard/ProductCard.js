@@ -21,18 +21,16 @@ const ProductCard = (props) => {
     }
     const addToCart = () => {
         if (authenticated) {
+            const cartTemp = cart;
             console.log(_id);
-            const findItem = cart.find(item => item.id === cartObject.id);
+            const findItem = cartTemp.find(item => item.id === cartObject.id);
+            const index = cart.indexOf(findItem);
             console.log(findItem, cartObject);
-            if (findItem === null || findItem === undefined) {
-                console.log("item not found")
-                return updateProfile(_id, {cart: [...cart, cartObject]});
-            }else{
-                console.log('item found');
-                findItem.qty += 1;
-                return updateProfile(_id, {cart: [...findItem]});
+            if(findItem){
+                cartTemp[index].qty += 1;
+               return updateProfile(_id, {cart: [...cartTemp]});
             }
-
+            return updateProfile(_id, {cart: [...cart, cartObject]});
         }
     }
 

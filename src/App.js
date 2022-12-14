@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider, useNavigate} from "react-router-dom";
 import Home from "./Pages/Home";
 import GlobalLayout from "./Layouts/GlobalLayout";
 import GlobalStyle from "./GlobalStyle";
@@ -10,9 +10,27 @@ import Register from "./Pages/Register/Register";
 import {useAuthContext} from "./Hooks/Auth";
 import ProfileSetupLayout from "./Layouts/ProfileSetupLayout";
 import ProfileSetup from "./Pages/Profile/ProfileSetup";
+import {useEffect} from "react";
+import {useProfileContext} from "./Hooks/Profile";
+
+
 
 function App() {
-    const Auth = useAuthContext();
+    const {getSession, authenticated} = useAuthContext();
+    const {getProfile, active} = useProfileContext();
+
+
+    useEffect(()=>{
+        if (!authenticated) {
+
+            getSession().then(response => {
+                if (response.id) {
+                    getProfile(response.id)
+                }
+            })
+        }
+
+    }, [])
     const router = createBrowserRouter([
         {
             path: '/',

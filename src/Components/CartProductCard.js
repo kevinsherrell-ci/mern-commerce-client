@@ -11,7 +11,7 @@ import {useEffect, useState} from "react";
 
 const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
     console.log("CART PRODUCT CARD")
-    const {updateQty, removeItem, cart, updateProfile, updateCart, _id} = useProfileContext();
+    const {_id, user_id, firstName, middleName, lastName, shippingAddress, billingAddress, cart, favorites, active, updateQty,dateCreated, dateModified, removeItem ,updateProfile, updateCart} = useProfileContext();
     const [_qty, _setQty] = useState(1);
     console.log(_qty);
     const cartTemp = cart;
@@ -35,6 +35,7 @@ const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
                 if (cartTemp[index].qty === 0) {
                     console.log("deleting cart item");
                     removeItem(_id,cartTemp[index]);
+                    break;
                 }
                 updateProfile(_id, {cart: [...cartTemp]})
                 break;

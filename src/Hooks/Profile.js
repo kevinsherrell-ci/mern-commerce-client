@@ -16,7 +16,7 @@ export const ProfileProvider = ({children}) => {
         billingAddress: {},
         cart: [],
         favorites: [],
-        active: false,
+        active: null,
         message: []
     });
     const [cart, setCart] = useState([]);
@@ -111,7 +111,7 @@ export const ProfileProvider = ({children}) => {
                 "Content-Type": "application/json"
             },
             credentials: 'include',
-            body: JSON.stringify(cartObject)
+            body: JSON.stringify({id: cartObject.id})
         }
         fetch(`${URL}/profiles/update/${profileId}/cart/remove`, options)
             .then(response => response.json())

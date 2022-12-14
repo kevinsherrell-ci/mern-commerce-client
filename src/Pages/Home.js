@@ -16,22 +16,27 @@ const Home = () => {
     const {user, getSession, authenticated} = useAuthContext();
 
 
-    useEffect(() => {
-        if (!authenticated) {
+    // useEffect(() => {
+    //     // if (!authenticated) {
+    //     //
+    //     //     getSession().then(response => {
+    //     //         if (response.id) {
+    //     //             getProfile(response.id)
+    //     //         }
+    //     //     })
+    //     // }
+    //     console.log(active);
+    //
+    //     console.log(active);
+    //
+    // }, [])
 
-            getSession().then(response => {
-                if (response.id) {
-                    getProfile(response.id)
-                }
-            })
+        console.log(authenticated, active);
+        const checkActive = async ()=>{
+            const _active = await active;
+            (authenticated && _active === false) && navigate('/profile/setup')
         }
-        {(authenticated && active === false) && navigate('/profile/setup')}
-
-
-
-    }, [])
-
-
+        checkActive();
     const mapProducts = allProducts.map(product => {
         // const stringProduct = JSON.stringify(product);
         // console.log(product);
