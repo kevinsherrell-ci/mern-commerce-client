@@ -1,19 +1,23 @@
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
-
-export const NavBarContainer = styled.div`
+import {device} from '../../Utilities/media-queries';
+export const NavBarContainer = styled.nav`
   position: sticky;
   top: 0;
   display: flex;
   flex-direction: column;
   margin: 10px 0;
+  width: 100%;
   background-color: white;
 `
 export const InnerContainer = styled.div`
   position: relative;
   max-width: 900px;
-  min-width: 60%;
+  width: 60%;
   margin: 0 auto;
+  @media ${device.laptop}{
+    width: 80%;
+  }
 `
 export const AccountSection = styled.div`
   display: flex;

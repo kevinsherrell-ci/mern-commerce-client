@@ -11,14 +11,12 @@ const GlobalLayout = () => {
             <NavBar/>
             <MainContainer>
                 <InnerContainer>
-                    <Sidebar width={'20%'}/>
+                    <Sidebar/>
                     <ContentContainer>
                         <Outlet/>
                     </ContentContainer>
                 </InnerContainer>
-
             </MainContainer>
-
         </GlobalContainer>
     )
 }
