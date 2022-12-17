@@ -11,12 +11,13 @@ import {useEffect, useState} from "react";
 
 const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
     console.log("CART PRODUCT CARD")
-    const {_id, user_id, firstName, middleName, lastName, shippingAddress, billingAddress, cart, favorites, active, updateQty,dateCreated, dateModified, removeItem ,updateProfile, updateCart} = useProfileContext();
+    const {_id, user_id, firstName, middleName, lastName, shippingAddress, billingAddress, cart, favorites, active, updateQty,dateCreated, dateModified, removeItem ,updateProfile, updateCart, getCartTotal} = useProfileContext();
     const [_qty, _setQty] = useState(1);
     console.log(_qty);
     const cartTemp = cart;
     const found = cart.find((item) => item.id === id);
     const index = cart.indexOf(found);
+
     const adjustQty = (e) => {
         let quantity = _qty;
 
@@ -38,6 +39,7 @@ const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
                     break;
                 }
                 updateProfile(_id, {cart: [...cartTemp]})
+                getCartTotal();
                 break;
             case "increase":
                 console.log("increase qty");
@@ -46,6 +48,7 @@ const CartProductCard = ({id, api_featured_image, brand, name, price, qty}) => {
                 console.log(cartTemp[index].qty)
 
                 updateProfile(_id, {cart: [...cartTemp]})
+                getCartTotal();
                 // quantity++
                 // _setQty(quantity);
                 // updateQty(id, _qty)

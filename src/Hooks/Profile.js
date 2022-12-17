@@ -173,6 +173,7 @@ export const ProfileProvider = ({children}) => {
             ...state,
             addToCart: addToCart,
             getCartTotal: getCartTotal,
+            total: total,
             updateQty: updateQty,
             removeItem: removeItem,
             createProfile: createProfile,

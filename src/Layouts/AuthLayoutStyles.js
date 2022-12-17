@@ -16,7 +16,7 @@ export const InnerContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   row-gap: 20px;
-  width: 40%;
+  width: 60%;
   margin: 0 auto;
   height: 100%;
 `

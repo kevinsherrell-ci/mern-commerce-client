@@ -22,8 +22,20 @@ const NavBar = () => {
     const [cartOpened, setCartOpened] = useState(false);
 
     const mapCart = cart && cart.map((item, index) => {
-        return (item.qty > 0) && <CartProductCard {...item} key={item.name + item.id + index} />
+        return (item.qty > 0) && <CartProductCard {...item} key={item.name + item.id + index}/>
     })
+    const calculateTotal = () => {
+        let totalPrice = 0;
+        if (cart.length > 0) {
+            cart.forEach(item => {
+                // some prices on the data are null, if so replace with 15
+                const itemPrice = (item.price === null && parseInt(item.price) < 1) ? 15 : item.price;
+                totalPrice += (itemPrice * item.qty);
+            })
+        }
+        return totalPrice;
+    }
+
     useEffect(() => {
     }, [cart, loggedIn, user])
     const displayGreeting = () => {
@@ -64,14 +76,11 @@ const NavBar = () => {
                     <CartContainer height={"500px"}>
 
                         {mapCart}
-                        <p>Total Price: ${total}</p>
+                        <p>Total Price: ${calculateTotal()}</p>
                     </CartContainer>
                 )}
             </InnerContainer>
-
-
         </NavBarContainer>
-
     )
 }
 export default NavBar;
