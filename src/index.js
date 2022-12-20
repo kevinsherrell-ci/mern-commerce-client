@@ -5,19 +5,20 @@ import reportWebVitals from './reportWebVitals';
 import {MakeupProvider} from "./Hooks/MakeupAPI";
 import {ProfileProvider} from "./Hooks/Profile";
 import {AuthProvider} from "./Hooks/Auth";
+import {ProductProvider} from "./Hooks/Product";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <AuthProvider>
-            <ProfileProvider>
-                <MakeupProvider>
-                    <App/>
-                </MakeupProvider>
-            </ProfileProvider>
-        </AuthProvider>
-
-
+        <ProductProvider>
+            <AuthProvider>
+                <ProfileProvider>
+                    <MakeupProvider>
+                        <App/>
+                    </MakeupProvider>
+                </ProfileProvider>
+            </AuthProvider>
+        </ProductProvider>
     </React.StrictMode>
 );
 

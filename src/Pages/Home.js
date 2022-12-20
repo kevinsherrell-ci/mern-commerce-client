@@ -6,30 +6,23 @@ import {useProfileContext} from "../Hooks/Profile";
 import {useAuthContext} from "../Hooks/Auth";
 // import {uuid} from "uuidv4";
 import {useNavigate} from 'react-router-dom';
+import {useProductContext} from "../Hooks/Product";
 
 
 const Home = () => {
     console.log('Home')
     const navigate = useNavigate();
     const {allProducts, getAllProducts} = useContext(MakeupContext);
+    const {getProducts, state} = useProductContext();
     const {getProfile, _id, user_id, active} = useProfileContext();
     const {user, getSession, authenticated} = useAuthContext();
+    console.log(state);
+
+    useEffect(() => {
+        getProducts();
 
 
-    // useEffect(() => {
-    //     // if (!authenticated) {
-    //     //
-    //     //     getSession().then(response => {
-    //     //         if (response.id) {
-    //     //             getProfile(response.id)
-    //     //         }
-    //     //     })
-    //     // }
-    //     console.log(active);
-    //
-    //     console.log(active);
-    //
-    // }, [])
+    }, [])
 
         console.log(authenticated, active);
         const checkActive = async ()=>{
