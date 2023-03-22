@@ -8,7 +8,10 @@ export const MakeupProvider = (props) => {
     const [allProducts, setAllProducts] = useState([]); // temporary until pagination is set up
     const [selectedProduct, setSelectedProduct] = useState({});
     const [errors, setErrors] = useState();
-    const url = 'http://makeup-api.herokuapp.com/api/v1/products.json'
+    // if http enabled
+    // const url = 'http://makeup-api.herokuapp.com/api/v1/products.json'
+    // if https enabled
+    const url = 'https://makeup-api.herokuapp.com/api/v1/products.json'
 
     // search products by query
     const getData = (queryString) => {
