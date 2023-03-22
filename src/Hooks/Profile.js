@@ -33,7 +33,7 @@ export const ProfileProvider = ({children}) => {
                 user_id: userId
             })
         }
-        fetch(`${URL}/profiles/create`, options)
+        fetch(`${URL}/api/profiles/create`, options)
             .then(response => response.json())
             .then(response => {
                 if (response.error) {
@@ -57,7 +57,7 @@ export const ProfileProvider = ({children}) => {
             credentials: "include"
         }
 
-        const profileReq = await fetch(`${URL}/profiles/${userId}`, options);
+        const profileReq = await fetch(`${URL}/api/profiles/${userId}`, options);
         const profileRes = await profileReq.json();
 
 
@@ -85,7 +85,7 @@ export const ProfileProvider = ({children}) => {
             credentials: 'include',
             body: JSON.stringify(updateObj)
         }
-        fetch(`${URL}/profiles/update/${profileId}`, options)
+        fetch(`${URL}/api/profiles/update/${profileId}`, options)
             .then(response => response.json())
             .then(response => {
                 if (response.error) {
@@ -113,7 +113,7 @@ export const ProfileProvider = ({children}) => {
             credentials: 'include',
             body: JSON.stringify({id: cartObject.id})
         }
-        fetch(`${URL}/profiles/update/${profileId}/cart/remove`, options)
+        fetch(`${URL}/api/profiles/update/${profileId}/cart/remove`, options)
             .then(response => response.json())
             .then(response => {
                 if (response.error) {

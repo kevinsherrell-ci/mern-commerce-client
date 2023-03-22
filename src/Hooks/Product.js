@@ -23,7 +23,7 @@ export const ProductProvider = ({children}) => {
             body: body || null
         }
 
-        const productReq = await fetch(`${URL}/products/find${query && query}`, options);
+        const productReq = await fetch(`${URL}/api/products/find${query && query}`, options);
         const productRes = await productReq.json();
         console.log(productRes);
 

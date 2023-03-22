@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) => {
             credentials: "include"
         }
 
-        const sessionReq = await fetch(`${URL}/users/reconnect`, options);
+        const sessionReq = await fetch(`${URL}/api/users/reconnect`, options);
         const sessionRes = await sessionReq.json();
 
         if (sessionRes.error) {
@@ -85,7 +85,7 @@ export const AuthProvider = ({children}) => {
             body: JSON.stringify(obj)
         }
 
-        const regRequest = await fetch(`${URL}/users/register`, options);
+        const regRequest = await fetch(`${URL}/api/users/register`, options);
         const regResponse = await regRequest.json();
 
         if (regResponse.error) {
@@ -158,7 +158,7 @@ export const AuthProvider = ({children}) => {
         }
 
 
-        fetch(`${URL}/users/login`, options)
+        fetch(`${URL}/api/users/login`, options)
             .then(response => response.json())
             .then(response => {
                 if (response.error) {
@@ -180,7 +180,7 @@ export const AuthProvider = ({children}) => {
             method: "DELETE",
             credentials: 'include'
         }
-        fetch(`${URL}/users/logout`, options)
+        fetch(`${URL}/api/users/logout`, options)
             .then(response => response.json())
             .then((response) => {
                 if (response.error) {
